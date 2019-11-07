@@ -2,8 +2,9 @@
   "name": "postgresql-app",
   "version": "1.0.0",
   "description": "Node PostgreSQL Application",
-  "main": "server/app.js",
+  "main": "server/index.js",
   "scripts": {
+    "start": "nodemon --exec babel-node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/mohamedsamara/node-postgresql-app/issues"
   },
-  "homepage": "https://github.com/mohamedsamara/node-postgresql-app#readme"
+  "homepage": "https://github.com/mohamedsamara/node-postgresql-app#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
