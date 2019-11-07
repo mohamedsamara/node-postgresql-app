@@ -4,7 +4,11 @@
   "description": "Node PostgreSQL Application",
   "main": "server/index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/index.js",
+    "build": "npm run build:clean && cross-env NODE_ENV=production webpack --progress --colors",
+    "build:clean": "rimraf ./dist",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node server",
+    "start:prod": "cross-env NODE_ENV=production node --exec babel-node server",
+    "start:production": "npm run build && npm run start:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,10 +24,36 @@
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
+    "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
-    "nodemon": "^1.19.4"
+    "@babel/preset-react": "^7.7.0",
+    "autoprefixer": "^9.7.1",
+    "babel-loader": "^8.0.6",
+    "chalk": "^2.4.2",
+    "compression": "^1.7.4",
+    "connect-history-api-fallback": "^1.6.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "nodemon": "^1.19.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack": "^4.41.2",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   }
 }
