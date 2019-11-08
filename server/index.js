@@ -22,8 +22,8 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.use(
     historyApiFallback({
-      verbose: false
-    })
+      verbose: false,
+    }),
   );
 
   app.use(
@@ -36,9 +36,9 @@ if (process.env.NODE_ENV !== 'production') {
         timings: true,
         chunks: false,
         chunkModules: false,
-        modules: false
-      }
-    })
+        modules: false,
+      },
+    }),
   );
 
   app.use(webpackHotMiddleware(compiler));
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.listen(PORT, () => {
   console.log(
     `${chalk.green('✓')} ${chalk.blue(
-      `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
-    )}`
+      `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
+    )}`,
   );
 });

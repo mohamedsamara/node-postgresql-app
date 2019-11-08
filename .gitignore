@@ -4,7 +4,6 @@
 # production
 /build
 /dist
-/.next
   
 # misc
 package-lock.json

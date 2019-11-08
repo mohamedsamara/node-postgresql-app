@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,7 +15,7 @@ module.exports = {
     path: path.join(CURRENT_WORKING_DIR, '/dist'),
     filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[name].[chunkhash].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -22,18 +24,18 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('cssnano'), require('autoprefixer')]
-            }
+              plugins: () => [require('cssnano'), require('autoprefixer')],
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
@@ -43,10 +45,10 @@ module.exports = {
             options: {
               outputPath: 'images',
               publicPath: '../images/',
-              name: '[name].[hash].[ext]'
-            }
-          }
-        ]
+              name: '[name].[hash].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -56,17 +58,17 @@ module.exports = {
             options: {
               outputPath: 'fonts',
               publicPath: '../fonts/',
-              name: '[name].[hash].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: '[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxAssetSize: 512000,
   },
   optimization: {
     minimize: true,
@@ -79,34 +81,34 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
+          chunks: 'all',
         },
         styles: {
           test: /\.css$/,
           name: 'styles',
           chunks: 'all',
-          enforce: true
-        }
-      }
+          enforce: true,
+        },
+      },
     },
     minimizer: [
       new TerserPlugin({
         terserOptions: {
           warnings: false,
           compress: {
-            comparisons: false
+            comparisons: false,
           },
           parse: {},
           mangle: true,
           output: {
             comments: false,
-            ascii_only: true
+            ascii_only: true,
           },
           parallel: true,
-          sourceMap: true
-        }
-      })
-    ]
+          sourceMap: true,
+        },
+      }),
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -122,11 +124,11 @@ module.exports = {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true
-      }
+        minifyURLs: true,
+      },
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css'
+      filename: 'css/[name].[hash].css',
     }),
     new WebpackPwaManifest({
       name: 'MERN Boilerplate',
@@ -140,23 +142,23 @@ module.exports = {
         {
           src: path.resolve('client/public/images/icon-512x512.png'),
           destination: 'images',
-          sizes: [72, 96, 128, 144, 192, 384, 512]
+          sizes: [72, 96, 128, 144, 192, 384, 512],
         },
         {
           src: path.resolve('client/public/images/icon-512x512.png'),
           sizes: [120, 152, 167, 180],
           destination: 'images',
-          ios: true
-        }
-      ]
+          ios: true,
+        },
+      ],
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
       cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }]
+        preset: ['default', { discardComments: { removeAll: true } }],
       },
-      canPrint: true
-    })
-  ]
+      canPrint: true,
+    }),
+  ],
 };

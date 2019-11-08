@@ -9,6 +9,8 @@
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node server",
     "start:prod": "cross-env NODE_ENV=production node --exec babel-node server",
     "start:production": "npm run build && npm run start:prod",
+    "lint": "eslint *.js && eslint client --ignore-path .eslintignore",
+    "lint:fix": "eslint *.js --fix && eslint client --fix --ignore-path .eslintignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -51,8 +53,18 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.3",
     "dotenv": "^8.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
     "express": "^4.17.1",
+    "prettier": "^1.18.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   }

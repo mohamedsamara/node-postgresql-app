@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +12,7 @@ module.exports = {
   output: {
     path: path.join(CURRENT_WORKING_DIR, '/dist'),
     filename: '[name].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -19,18 +21,18 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')]
-            }
+              plugins: () => [require('autoprefixer')],
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
@@ -39,10 +41,10 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'images',
-              name: '[name].[ext]'
-            }
-          }
-        ]
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -51,19 +53,19 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'fonts',
-              name: '[name].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(CURRENT_WORKING_DIR, 'client/public/index.html'),
-      inject: true
-    })
+      inject: true,
+    }),
   ],
   devServer: {
     port: 5000,
@@ -75,8 +77,8 @@ module.exports = {
     disableHostCheck: true,
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:5000'
-    }
+      '/api': 'http://localhost:5000',
+    },
   },
-  devtool: 'eval-source-map'
+  devtool: 'eval-source-map',
 };

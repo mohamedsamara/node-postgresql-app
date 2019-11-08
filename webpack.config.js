@@ -1,5 +1,8 @@
-const common = require('./config/webpack/webpack.common');
+/* eslint-disable */
+
 const webpackMerge = require('webpack-merge');
+
+const common = require('./config/webpack/webpack.common');
 
 let envConfig;
 switch (process.env.NODE_ENV) {
