@@ -1,1 +1,6 @@
 // You can add your custom styles here
+
+.test {
+  @include icon($facebook, 40px, 40px);
+  background-size: 100%;
+}

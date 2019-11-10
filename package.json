@@ -7,7 +7,7 @@
     "build": "npm run build:clean && cross-env NODE_ENV=production webpack --progress --colors",
     "build:clean": "rimraf ./dist",
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node server",
-    "start:prod": "cross-env NODE_ENV=production node --exec babel-node server",
+    "start:prod": "cross-env NODE_ENV=production node server",
     "start:production": "npm run build && npm run start:prod",
     "lint": "eslint *.js && eslint client --ignore-path .eslintignore",
     "lint:fix": "eslint *.js --fix && eslint client --fix --ignore-path .eslintignore",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/mohamedsamara/node-postgresql-app#readme",
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
     "@babel/polyfill": "^7.7.0",
@@ -61,7 +62,8 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-pwa-manifest": "^4.1.1"
   },
   "dependencies": {
     "babel-eslint": "^10.0.3",
