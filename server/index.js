@@ -10,8 +10,6 @@ import path from 'path';
 
 import webpackConfig from '../webpack.config';
 
-console.log('iss heeree');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 

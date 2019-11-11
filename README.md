@@ -30,6 +30,13 @@ $ npm run start:production
 
 ```
 
+## Run the code linter
+
+```
+$ npm run lint:fix
+
+```
+
 ## Languages & tools
 
 - [Node](https://nodejs.org/en/)
@@ -40,3 +47,4 @@ $ npm run start:production
 
 - [React](https://reactjs.org/)
 
+- [ESLint](https://eslint.org/)
