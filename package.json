@@ -4,10 +4,11 @@
   "description": "Node PostgreSQL Application",
   "main": "server/index.js",
   "scripts": {
-    "build": "npm run build:clean && cross-env NODE_ENV=production webpack --progress --colors",
+    "build": "npm run build:clean && npm run build:server && cross-env NODE_ENV=production webpack --progress --colors",
     "build:clean": "rimraf ./dist",
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node server",
-    "start:prod": "cross-env NODE_ENV=production node server",
+    "build:server": "webpack --mode=production --config webpack.config.server.js",
+    "start": "webpack --mode=development --config webpack.config.server.js && nodemon ./dist/server/server.bundle.js",
+    "start:prod": "cross-env NODE_ENV=production node ./dist/server/server.bundle.js",
     "start:production": "npm run build && npm run start:prod",
     "lint": "eslint *.js && eslint client --ignore-path .eslintignore",
     "lint:fix": "eslint *.js --fix && eslint client --fix --ignore-path .eslintignore",
@@ -47,6 +48,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
@@ -63,6 +65,7 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2",
     "webpack-pwa-manifest": "^4.1.1"
   },
   "dependencies": {

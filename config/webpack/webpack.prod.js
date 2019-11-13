@@ -11,8 +11,9 @@ const CURRENT_WORKING_DIR = process.cwd();
 
 module.exports = {
   mode: 'production',
+  target: 'web',
   output: {
-    path: path.join(CURRENT_WORKING_DIR, '/dist'),
+    path: path.join(CURRENT_WORKING_DIR, '/dist/client'),
     filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[name].[chunkhash].js',
     publicPath: '/',
@@ -113,6 +114,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(CURRENT_WORKING_DIR, 'client/public/index.html'),
+      // excludeChunks: ['server'],
       inject: true,
       minify: {
         removeComments: true,

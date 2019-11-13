@@ -29,25 +29,16 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(
     webpackMiddleware(compiler, {
       publicPath: webpackConfig.output.publicPath,
-      contentBase: path.resolve(__dirname, '../client/public'),
-      stats: {
-        colors: true,
-        hash: false,
-        timings: true,
-        chunks: false,
-        chunkModules: false,
-        modules: false,
-      },
     }),
   );
 
   app.use(webpackHotMiddleware(compiler));
-  app.use(express.static(path.resolve(__dirname, '../dist')));
 } else {
   app.use(compression());
-  app.use(express.static(path.resolve(__dirname, '../dist')));
+  app.use(express.static(path.resolve(__dirname, '../client')));
+
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+    res.sendFile(path.resolve(__dirname, '../client/index.html'));
   });
 }
 

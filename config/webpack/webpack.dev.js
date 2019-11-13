@@ -10,7 +10,7 @@ module.exports = {
   mode: 'development',
   entry: ['webpack-hot-middleware/client?reload=true'],
   output: {
-    path: path.join(CURRENT_WORKING_DIR, '/dist'),
+    path: path.join(CURRENT_WORKING_DIR, '/dist/client'),
     filename: '[name].js',
     publicPath: '/',
   },
@@ -76,6 +76,15 @@ module.exports = {
     hot: true,
     disableHostCheck: true,
     historyApiFallback: true,
+    contentBase: path.resolve(__dirname, '../client/public'),
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    },
     proxy: {
       '/api': 'http://localhost:5000',
     },
