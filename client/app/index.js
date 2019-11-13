@@ -8,9 +8,7 @@ ReactDOM.render(
   <div>
     <p>React</p>
     <img src="/images/social_icons/twitter.png" alt="" />
-    <div className="test">
-      <p>Image css placeholder</p>
-    </div>
+    <div className="test">Test</div>
   </div>,
   document.getElementById('root'),
 );
