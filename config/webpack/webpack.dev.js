@@ -69,7 +69,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    port: 5000,
+    port: 3000,
     open: true,
     inline: true,
     compress: true,
@@ -77,17 +77,8 @@ module.exports = {
     hot: true,
     disableHostCheck: true,
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, '../client/public'),
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false,
-    },
     proxy: {
-      '/api': 'http://localhost:5000',
+      '/api': 'http://localhost:3000',
     },
   },
   devtool: 'eval-source-map',

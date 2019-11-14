@@ -1,10 +1,10 @@
 # Node PostgreSQL App
 
-* features:
+* features:   
   * Node provides the backend environment for this application
   * Express middleware is used to handle requests, routes
   * React for displaying UI components
-
+        
 ## Install
 
 Some basic Git commands are:
@@ -26,7 +26,7 @@ $ npm start
 ## Run the application for production
 
 ```
-$ npm run start:production
+$ npm run production
 
 ```
 
