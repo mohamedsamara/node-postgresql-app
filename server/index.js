@@ -12,6 +12,7 @@ import path from 'path';
 import webpackConfig from '../webpack.config';
 
 import routes from './routes';
+import db from './models';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,7 +37,6 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(
     webpackMiddleware(compiler, {
       publicPath: webpackConfig.output.publicPath,
-      contentBase: path.resolve(__dirname, '../client/public'),
       stats: {
         colors: true,
         hash: false,
@@ -50,18 +50,24 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.use(webpackHotMiddleware(compiler));
 } else {
+  app.use(express.static(path.resolve(__dirname, './client')));
+
   app.get('*', (req, res) => {
-    app.use(express.static(path.resolve(__dirname, '../client')));
-    res.sendFile(path.resolve(__dirname, '../client/index.html'));
+    res.sendFile(path.resolve(__dirname, './client/index.html'));
   });
 }
 
-app.listen(PORT, () => {
-  console.log(
-    `${chalk.green('✓')} ${chalk.greenBright(
-      `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
-    )}`,
-  );
+const syncOptions = { force: false };
+
+// Starting the server, syncing our models
+db.sequelize.sync(syncOptions).then(async () => {
+  app.listen(PORT, () => {
+    console.log(
+      `${chalk.green('✓')} ${chalk.greenBright(
+        `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
+      )}`,
+    );
+  });
 });
 
 export default app;
