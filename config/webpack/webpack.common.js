@@ -22,15 +22,6 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /(node_modules)/,
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: { minimize: true },
-          },
-        ],
-      },
     ],
   },
   plugins: [
