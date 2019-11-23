@@ -26,8 +26,10 @@ $teal: #20c997 !default;
 $cyan: #67c2ef;
 $black: #000;
 
-$font-family-heading: 'Roboto', sans-serif;
-$font-family-body: 'Roboto', sans-serif;
+$font-stack: 'Roboto Slab', sans-serif;
+
+$font-family-heading: $font-stack;
+$font-family-body: $font-stack;
 $font-size-x-small: 12px;
 $font-size-small: 13px;
 $font-size-medium: 14px;
