@@ -3,9 +3,13 @@
 @import 'mixins';
 
 // layout
+// @import 'base';
 @import 'layout';
+@import 'footer';
 
 // Right-to-left
 @import 'rtl';
 
 // components
+
+// uncomment base scss above for  application base styles if not using material ui CssBaseline
