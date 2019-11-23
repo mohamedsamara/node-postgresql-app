@@ -16,9 +16,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import PeopleIcon from '@material-ui/icons/People';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Container from '@material-ui/core/Container';
+import { NavLink } from 'react-router-dom';
 
 import Footer from '../Footer';
 import useDrawerState from '../../utils/hooks/useDrawerState';
@@ -47,6 +49,11 @@ const useStyles = makeStyles(theme => ({
   },
   menuTitle: {
     color: `${theme.palette.common.white}!important`,
+  },
+  menuLink: {
+    display: 'block',
+    color: `${theme.palette.primary.main}`,
+    textDecoration: 'none',
   },
   hide: {
     display: 'none',
@@ -86,6 +93,7 @@ const useStyles = makeStyles(theme => ({
 const Layout = props => {
   const classes = useStyles();
   const theme = useTheme();
+   
   const { open, setOpen } = useDrawerState(false);
 
   const handleDrawerOpen = () => {
@@ -146,27 +154,51 @@ const Layout = props => {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          <NavLink
+            to={'/book/list'}
+            activeClassName="active-link"
+            className={classes.menuLink}
+            exact
+          >
+            <ListItem button key={'Books'}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <LibraryBooksIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={'Books'} />
             </ListItem>
-          ))}
+          </NavLink>
+          <NavLink
+            to={'/author/list'}
+            activeClassName="active-link"
+            className={classes.menuLink}
+            exact
+          >
+            <ListItem button key={'Authors'}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Authors'} />
+            </ListItem>
+          </NavLink>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
+          <NavLink
+            to={'/book/add'}
+            activeClassName="active-link"
+            className={classes.menuLink}
+            exact
+          >
+            <ListItem button key={'Add Book'}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <LibraryAddIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={'Add Book'} />
             </ListItem>
-          ))}
+          </NavLink>
         </List>
       </Drawer>
+
       <div className="application-content">
         <main className="main">
           <Container maxWidth="md">{props.children}</Container>

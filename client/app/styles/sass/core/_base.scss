@@ -47,19 +47,6 @@ label {
   margin: 0;
 }
 
-a {
-  color: $font-color !important;
-  text-decoration: none !important;
-
-  &:hover {
-    color: $font-hover-color !important;
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
 h1,
 h2,
 h3,
