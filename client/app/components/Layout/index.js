@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuLink: {
     display: 'block',
-    color: `${theme.palette.primary.main}`,
+    color: `${theme.palette.text.primary}`,
     textDecoration: 'none',
   },
   hide: {
@@ -93,7 +93,6 @@ const useStyles = makeStyles(theme => ({
 const Layout = props => {
   const classes = useStyles();
   const theme = useTheme();
-   
   const { open, setOpen } = useDrawerState(false);
 
   const handleDrawerOpen = () => {

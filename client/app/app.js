@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Router, Route, Switch } from 'react-router';
+import { Router } from 'react-router';
 import { ThemeProvider } from '@material-ui/styles';
 
 import theme from './utils/theme';
@@ -13,10 +13,7 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <Router history={history}>
-          <Switch>
-            <Route exact path="/" component={Application} />
-            <Route path="*" component={Application} />
-          </Switch>
+          <Application />
         </Router>
       </ThemeProvider>
     </>
