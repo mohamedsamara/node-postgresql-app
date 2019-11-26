@@ -1,0 +1,12 @@
+.page404 {
+  text-align: center;
+
+  a {
+    color: $theme-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
