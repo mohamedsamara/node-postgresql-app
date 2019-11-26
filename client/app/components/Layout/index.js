@@ -23,7 +23,7 @@ import Container from '@material-ui/core/Container';
 import { NavLink } from 'react-router-dom';
 
 import Footer from '../Footer';
-import useDrawerState from '../../utils/hooks/useDrawerState';
+import useDrawerState from '../../hooks/useDrawerState';
 
 const drawerWidth = 240;
 

@@ -1,9 +1,8 @@
-import Test from '../components/Test';
+import Book from '../containers/Book';
 import page404 from '../pages/404';
 
 const routes = [
-  { path: '/', exact: true, name: 'Test', component: Test },
-  { path: '/book/list', name: 'Test', component: Test },
+  { path: '/', name: 'Book', component: Book },
   { path: '*', component: page404 },
 ];
 
