@@ -19,6 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PeopleIcon from '@material-ui/icons/People';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import HomeIcon from '@material-ui/icons/Home';
 import Container from '@material-ui/core/Container';
 import { NavLink } from 'react-router-dom';
 
@@ -153,6 +154,19 @@ const Layout = props => {
         </div>
         <Divider />
         <List>
+          <NavLink
+            to={'/'}
+            activeClassName="active-link"
+            className={classes.menuLink}
+            exact
+          >
+            <ListItem button key={'Home'}>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Home'} />
+            </ListItem>
+          </NavLink>
           <NavLink
             to={'/book/list'}
             activeClassName="active-link"
