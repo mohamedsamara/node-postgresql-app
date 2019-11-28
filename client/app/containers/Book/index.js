@@ -4,9 +4,9 @@ import { Route, Switch, Redirect } from 'react-router';
 
 import BookList from '../../components/BookList';
 
+import AddBookForm from '../../components/AddBookForm';
+
 import Test from '../../components/Test';
-import Test2 from '../../components/Test2';
-import Test3 from '../../components/Test3';
 // import page404 from '../../pages/404';
 
 const Book = () => {
@@ -14,7 +14,7 @@ const Book = () => {
     <Switch>
       <Route exact path="/book" component={Test} />
       <Route path="/book/list" component={BookList} />
-      <Route path="/book/add" component={Test3} />
+      <Route path="/book/add" component={AddBookForm} />
       {/* <Route path="*" component={page404} /> */}
       <Redirect from="/" to="/" />
     </Switch>
