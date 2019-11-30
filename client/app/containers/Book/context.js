@@ -9,6 +9,8 @@ const BookProvider = props => {
   const [state, dispatch] = useReducer(bookReducer, initialState);
 
   useEffect(() => {}, []);
+  console.log('state', state);
+  console.log('dispatch', dispatch);
 
   const addBookApi = () => {};
 
