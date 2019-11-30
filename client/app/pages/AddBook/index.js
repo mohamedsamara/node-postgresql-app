@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Typography from '@material-ui/core/Typography';
 
 import { useHistory } from 'react-router-dom';
 
@@ -52,7 +53,9 @@ const AddBook = () => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <h2 id="transition-modal-title">Add Book</h2>
+          <Typography variant="h6" component="h6">
+            Add Book
+          </Typography>
           <AddBookForm />
         </div>
       </Fade>

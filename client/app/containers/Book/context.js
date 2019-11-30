@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect } from 'react';
 
-// import { fetchBooks, addBook } from './action';
+import axios from 'axios';
+
+import { fetchBooks, addBook } from './action';
 import { initialState, bookReducer } from './reducer';
 
 const BookContext = React.createContext(initialState);
@@ -8,11 +10,42 @@ const BookContext = React.createContext(initialState);
 const BookProvider = props => {
   const [state, dispatch] = useReducer(bookReducer, initialState);
 
-  useEffect(() => {}, []);
-  console.log('state', state);
-  console.log('dispatch', dispatch);
+  // add book api
+  const addBookApi = async bookData => {
+    try {
+      const response = await axios.post(`/api/book`, bookData);
 
-  const addBookApi = () => {};
+      const book = response.data.data;
+
+      if (book) {
+        dispatch(addBook(book));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // fetch books api
+  const fetchBooksApi = async () => {
+    try {
+      const response = await axios.get(`/api/book`);
+
+      const books = response.data.data;
+      console.log(books);
+
+      if (books) {
+        dispatch(fetchBooks(books));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (state.books) {
+      fetchBooksApi();
+    }
+  }, []);
 
   return (
     <BookContext.Provider value={{ state, dispatch, addBookApi }}>

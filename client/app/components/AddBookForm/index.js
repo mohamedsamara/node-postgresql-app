@@ -1,31 +1,83 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+
+import { BookContext } from '../../containers/Book/context';
 
 import useBookInputState from '../../hooks/useBookInputState';
 
-const AddBookForm = ({ saveBook }) => {
-  const { value, onChange, reset } = useBookInputState('');
+const useStyles = makeStyles(theme => ({
+  saveBtn: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+const AddBookForm = () => {
+  const classes = useStyles();
+  const { values, onChange, reset } = useBookInputState({
+    title: '',
+    price: 0,
+    description: '',
+  });
+  const context = useContext(BookContext);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    context.addBookApi(values);
+    reset();
+  };
 
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
-
-        saveBook(value);
-        reset();
-      }}
-    >
+    <form>
       <TextField
+        autoComplete="off"
         autoFocus
-        id="standard-basic"
         fullWidth
-        label="Name"
+        label="Title"
+        name="title"
         placeholder="Book Name"
         margin="normal"
+        value={values.title}
         onChange={onChange}
-        value={value}
       />
+      <TextField
+        fullWidth
+        multiline
+        rowsMax="4"
+        label="Description"
+        name="description"
+        placeholder="Book Description"
+        margin="normal"
+        value={values.description}
+        onChange={onChange}
+      />
+
+      <TextField
+        autoComplete="off"
+        fullWidth
+        label="Price"
+        name="price"
+        placeholder="Book Price"
+        onChange={onChange}
+        margin="normal"
+        value={values.price}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        }}
+      />
+
+      <Button
+        variant="outlined"
+        color="primary"
+        fullWidth
+        className={classes.saveBtn}
+        onClick={handleSubmit}
+      >
+        Save Book
+      </Button>
     </form>
   );
 };

@@ -1,15 +1,20 @@
 import { useState } from 'react';
 
-export default () => {
-  const [value, setValue] = useState('');
+export default initialValue => {
+  const [values, setValues] = useState(initialValue);
+
+  console.log('values', values);
 
   return {
-    value,
-    onChange: e => {
-      setValue(e.target.value);
+    values,
+    onChange: event => {
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value,
+      });
     },
     reset: () => {
-      setValue('');
+      setValues(initialValue);
     },
   };
 };
