@@ -3,8 +3,6 @@ import { useState } from 'react';
 export default initialValue => {
   const [values, setValues] = useState(initialValue);
 
-  console.log('values', values);
-
   return {
     values,
     onChange: event => {

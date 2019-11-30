@@ -23,6 +23,7 @@
     "arrow-parens": "off",
     "no-useless-catch": "off",
     "no-multiple-empty-lines": "off",
+    "no-case-declarations": "off",
     "import/newline-after-import": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",

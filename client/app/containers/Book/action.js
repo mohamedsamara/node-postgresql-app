@@ -1,4 +1,9 @@
-import { FETCH_BOOKS, ADD_BOOK } from './constant';
+import {
+  FETCH_BOOKS,
+  ADD_BOOK,
+  DELETE_BOOK,
+  TOGGLE_BOOK_CARD,
+} from './constant';
 
 export const fetchBooks = books => ({
   type: FETCH_BOOKS,
@@ -9,5 +14,19 @@ export const addBook = book => {
   return {
     type: ADD_BOOK,
     payload: book,
+  };
+};
+
+export const deleteBook = index => {
+  return {
+    type: DELETE_BOOK,
+    payload: index,
+  };
+};
+
+export const toggleBookCard = index => {
+  return {
+    type: TOGGLE_BOOK_CARD,
+    payload: index,
   };
 };
