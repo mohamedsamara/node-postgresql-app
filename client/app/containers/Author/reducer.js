@@ -1,9 +1,30 @@
+import update from 'immutability-helper';
+
+import { FETCH_AUTHORS, ADD_AUTHOR } from './constant';
+
 const initialState = {
   authors: [],
 };
 
-const authorReducer = (state, action) => {
+const authorReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
+    case FETCH_AUTHORS:
+      newState = update(state, {
+        authors: {
+          $set: action.payload,
+        },
+      });
+      return newState;
+
+    case ADD_AUTHOR:
+      newState = update(state, {
+        authors: {
+          $unshift: [action.payload],
+        },
+      });
+      return newState;
+
     default:
       return state;
   }

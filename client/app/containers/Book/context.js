@@ -25,7 +25,7 @@ const BookProvider = props => {
     }
   };
 
-  // add book api
+  // delete book api
   const deleteBookApi = async (index, id) => {
     try {
       const response = await axios.delete(`/api/book/${id}`);

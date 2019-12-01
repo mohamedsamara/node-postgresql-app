@@ -20,6 +20,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PeopleIcon from '@material-ui/icons/People';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import HomeIcon from '@material-ui/icons/Home';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Container from '@material-ui/core/Container';
 import { NavLink } from 'react-router-dom';
 
@@ -181,6 +182,22 @@ const Layout = props => {
             </ListItem>
           </NavLink>
           <NavLink
+            to={'/book/add'}
+            activeClassName="active-link"
+            className={classes.menuLink}
+            exact
+          >
+            <ListItem button key={'Add Book'}>
+              <ListItemIcon>
+                <LibraryAddIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Add Book'} />
+            </ListItem>
+          </NavLink>
+        </List>
+        <Divider />
+        <List>
+          <NavLink
             to={'/author/list'}
             activeClassName="active-link"
             className={classes.menuLink}
@@ -193,20 +210,17 @@ const Layout = props => {
               <ListItemText primary={'Authors'} />
             </ListItem>
           </NavLink>
-        </List>
-        <Divider />
-        <List>
           <NavLink
-            to={'/book/add'}
+            to={'/author/add'}
             activeClassName="active-link"
             className={classes.menuLink}
             exact
           >
-            <ListItem button key={'Add Book'}>
+            <ListItem button key={'Add Author'}>
               <ListItemIcon>
-                <LibraryAddIcon />
+                <PersonAddIcon />
               </ListItemIcon>
-              <ListItemText primary={'Add Book'} />
+              <ListItemText primary={'Add Author'} />
             </ListItem>
           </NavLink>
         </List>

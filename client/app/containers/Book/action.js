@@ -5,10 +5,12 @@ import {
   TOGGLE_BOOK_CARD,
 } from './constant';
 
-export const fetchBooks = books => ({
-  type: FETCH_BOOKS,
-  payload: books,
-});
+export const fetchBooks = books => {
+  return {
+    type: FETCH_BOOKS,
+    payload: books,
+  };
+};
 
 export const addBook = book => {
   return {
