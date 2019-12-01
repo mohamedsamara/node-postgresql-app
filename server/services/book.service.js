@@ -17,16 +17,16 @@ class BookService {
     }
   }
 
-  static async updateBook(id, updateBook) {
+  static async updateBook(id, newBook) {
     try {
       const bookToUpdate = await database.book.findOne({
         where: { id: Number(id) },
       });
 
       if (bookToUpdate) {
-        await database.book.update(updateBook, { where: { id: Number(id) } });
+        await database.book.update(newBook, { where: { id: Number(id) } });
 
-        return updateBook;
+        return newBook;
       }
       return null;
     } catch (error) {
@@ -36,11 +36,11 @@ class BookService {
 
   static async getBook(id) {
     try {
-      const theBook = await database.book.findOne({
+      const book = await database.book.findOne({
         where: { id: Number(id) },
       });
 
-      return theBook;
+      return book;
     } catch (error) {
       throw error;
     }

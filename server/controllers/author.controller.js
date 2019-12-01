@@ -42,6 +42,29 @@ class AuthorController {
       return responder.send(res);
     }
   }
+
+  static async getAuthor(req, res) {
+    const { id } = req.params;
+
+    if (!Number(id)) {
+      responder.setError(400, 'please enter a valid numeric value');
+      return responder.send(res);
+    }
+
+    try {
+      const author = await AuthorService.getAuthor(id);
+
+      if (!author) {
+        responder.setError(404, `cannot find author with the id ${id}`);
+      } else {
+        responder.setSuccess(200, 'found author', author);
+      }
+      return responder.send(res);
+    } catch (error) {
+      responder.setError(404, error);
+      return responder.send(res);
+    }
+  }
 }
 
 export default AuthorController;

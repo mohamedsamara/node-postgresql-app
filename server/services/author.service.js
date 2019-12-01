@@ -16,6 +16,24 @@ class AuthorService {
       throw error;
     }
   }
+
+  static async getAuthor(id) {
+    try {
+      const author = await database.author.findOne({
+        where: { id: Number(id) },
+        include: [
+          {
+            model: database.book,
+            as: 'books',
+          },
+        ],
+      });
+
+      return author;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default AuthorService;

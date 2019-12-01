@@ -15,9 +15,10 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
+import { NavLink } from 'react-router-dom';
 
 import { BookContext } from '../../containers/Book/context';
 
@@ -46,6 +47,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#f44336',
     color: `${theme.palette.common.white}`,
   },
+  editLink: {
+    display: 'block',
+    color: `${theme.palette.text.primary}`,
+    margin: theme.spacing(1),
+  },
 }));
 
 const BookList = () => {
@@ -64,9 +70,14 @@ const BookList = () => {
                 </Avatar>
               }
               action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
+                <NavLink
+                  to={`/book/${book.id}`}
+                  activeClassName="active-link"
+                  className={classes.editLink}
+                  exact
+                >
+                  <EditIcon size="small" />
+                </NavLink>
               }
               title={book.title}
               subheader={new Date(book.createdAt).toLocaleString()}

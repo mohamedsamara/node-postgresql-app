@@ -5,6 +5,14 @@ const Author = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  author.associate = models => {
+    author.hasMany(models.book, {
+      foreignKey: 'author_id',
+      as: 'books',
+    });
+  };
+
   return author;
 };
 

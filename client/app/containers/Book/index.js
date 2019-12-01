@@ -6,6 +6,7 @@ import { BookProvider } from './context';
 
 import Books from '../../pages/Books';
 import AddBook from '../../pages/AddBook';
+import BookPage from '../../pages/Book';
 
 const Book = () => {
   return (
@@ -13,6 +14,7 @@ const Book = () => {
       <Switch>
         <Route path="/book/list" component={Books} />
         <Route path="/book/add" component={AddBook} />
+        <Route path="/book/:id" component={BookPage} />
         <Redirect from="/" to="/book/list" />
       </Switch>
     </BookProvider>

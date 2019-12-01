@@ -2,7 +2,14 @@ import React, { useReducer, useEffect } from 'react';
 
 import axios from 'axios';
 
-import { fetchBooks, addBook, deleteBook, toggleBookCard } from './action';
+import {
+  fetchBooks,
+  addBook,
+  deleteBook,
+  toggleBookCard,
+  fetchBook,
+} from './action';
+
 import { initialState, bookReducer } from './reducer';
 
 const BookContext = React.createContext(initialState);
@@ -19,6 +26,21 @@ const BookProvider = props => {
 
       if (book) {
         dispatch(addBook(book));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // fetch book api
+  const fetchBookApi = async id => {
+    try {
+      const response = await axios.get(`/api/book/${id}`);
+
+      const book = response.data.data;
+
+      if (book) {
+        dispatch(fetchBook(book));
       }
     } catch (error) {
       console.log(error);
@@ -61,7 +83,14 @@ const BookProvider = props => {
 
   return (
     <BookContext.Provider
-      value={{ state, dispatch, addBookApi, deleteBookApi, toggleBookCard }}
+      value={{
+        state,
+        dispatch,
+        addBookApi,
+        deleteBookApi,
+        toggleBookCard,
+        fetchBookApi,
+      }}
     >
       {props.children}
     </BookContext.Provider>

@@ -1,5 +1,6 @@
 const Book = (sequelize, DataTypes) => {
   const book = sequelize.define('book', {
+    author_id: DataTypes.INTEGER,
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,6 +14,13 @@ const Book = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  book.associate = models => {
+    book.belongsTo(models.author, {
+      foreignKey: 'author_id',
+    });
+  };
+
   return book;
 };
 
