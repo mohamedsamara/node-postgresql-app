@@ -23,6 +23,25 @@ class AuthorController {
     }
   }
 
+  static async getAuthorsList(req, res) {
+    try {
+      const authors = await AuthorService.getAuthorsList();
+      if (authors.length > 0) {
+        responder.setSuccess(
+          200,
+          'authors are successfully retrieved',
+          authors,
+        );
+      } else {
+        responder.setSuccess(200, 'No authors found');
+      }
+      return responder.send(res);
+    } catch (error) {
+      responder.setError(400, error);
+      return responder.send(res);
+    }
+  }
+
   static async addAuthor(req, res) {
     if (!req.body.name) {
       responder.setError(400, 'some details are missing');

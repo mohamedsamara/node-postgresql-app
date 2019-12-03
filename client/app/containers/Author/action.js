@@ -1,4 +1,9 @@
-import { FETCH_AUTHORS, ADD_AUTHOR, FETCH_AUTHOR } from './constant';
+import {
+  FETCH_AUTHORS,
+  ADD_AUTHOR,
+  FETCH_AUTHOR,
+  FETCH_AUTHOR_LIST,
+} from './constant';
 
 export const fetchAuthors = authors => {
   return {
@@ -18,5 +23,12 @@ export const fetchAuthor = author => {
   return {
     type: FETCH_AUTHOR,
     payload: author,
+  };
+};
+
+export const fetchAuthorsList = authors => {
+  return {
+    type: FETCH_AUTHOR_LIST,
+    payload: authors,
   };
 };

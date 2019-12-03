@@ -8,6 +8,9 @@ import { useParams } from 'react-router';
 import Select from 'react-select';
 
 import { BookContext } from '../../containers/Book/context';
+import { AuthorContext } from '../../containers/Author/context';
+
+import useAuthorsListState from '../../hooks/useAuthorsListState';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,12 +35,18 @@ const useStyles = makeStyles(theme => ({
 
 const Book = () => {
   const context = useContext(BookContext);
+  const authorContext = useContext(AuthorContext);
+  // console.log('context2', authorContext);
+
+  const { option, setOption } = useAuthorsListState();
+
   const classes = useStyles();
 
   const { id } = useParams();
 
   useEffect(() => {
     context.fetchBookApi(id);
+    authorContext.fetchAuthorsListApi();
   }, []);
 
   return (
@@ -65,6 +74,9 @@ const Book = () => {
           name="author"
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
+          options={authorContext.state.authorsList}
+          value={option}
+          onChange={setOption}
         />
       </div>
     </div>

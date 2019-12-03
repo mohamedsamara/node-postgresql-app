@@ -9,6 +9,19 @@ class AuthorService {
     }
   }
 
+  static async getAuthorsList() {
+    try {
+      return await database.author.findAll({
+        attributes: [
+          ['id', 'value'],
+          ['name', 'label'],
+        ],
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addAuthor(newAuthor) {
     try {
       return await database.author.create(newAuthor);

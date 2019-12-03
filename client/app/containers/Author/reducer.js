@@ -1,10 +1,16 @@
 import update from 'immutability-helper';
 
-import { FETCH_AUTHORS, ADD_AUTHOR, FETCH_AUTHOR } from './constant';
+import {
+  FETCH_AUTHORS,
+  ADD_AUTHOR,
+  FETCH_AUTHOR,
+  FETCH_AUTHOR_LIST,
+} from './constant';
 
 const initialState = {
   authors: [],
   author: {},
+  authorsList: [],
 };
 
 const authorReducer = (state = initialState, action) => {
@@ -29,6 +35,14 @@ const authorReducer = (state = initialState, action) => {
     case FETCH_AUTHOR:
       newState = update(state, {
         author: {
+          $set: action.payload,
+        },
+      });
+      return newState;
+
+    case FETCH_AUTHOR_LIST:
+      newState = update(state, {
+        authorsList: {
           $set: action.payload,
         },
       });

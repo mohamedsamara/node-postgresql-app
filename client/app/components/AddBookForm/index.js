@@ -17,11 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const AddBookForm = () => {
   const classes = useStyles();
-  const { values, onChange, reset } = useBookInputState({
-    title: '',
-    price: 0,
-    description: '',
-  });
+  const { values, onChange, reset } = useBookInputState();
   const context = useContext(BookContext);
 
   const handleSubmit = event => {

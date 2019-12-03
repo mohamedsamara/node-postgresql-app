@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-export default initialValue => {
+const initialValue = {
+  title: '',
+  price: 0,
+  description: '',
+};
+
+export default () => {
   const [values, setValues] = useState(initialValue);
 
   return {

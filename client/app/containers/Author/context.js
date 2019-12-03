@@ -2,7 +2,12 @@ import React, { useReducer, useEffect } from 'react';
 
 import axios from 'axios';
 
-import { fetchAuthors, addAuthor, fetchAuthor } from './action';
+import {
+  fetchAuthors,
+  addAuthor,
+  fetchAuthor,
+  fetchAuthorsList,
+} from './action';
 import { initialState, authorReducer } from './reducer';
 
 const AuthorContext = React.createContext(initialState);
@@ -32,8 +37,6 @@ const AuthorProvider = props => {
 
       const author = response.data.data;
 
-      console.log('author', author);
-
       if (author) {
         dispatch(fetchAuthor(author));
       }
@@ -57,6 +60,21 @@ const AuthorProvider = props => {
     }
   };
 
+  // fetch authors list api
+  const fetchAuthorsListApi = async () => {
+    try {
+      const response = await axios.get(`/api/author/list`);
+
+      const authors = response.data.data;
+
+      if (authors) {
+        dispatch(fetchAuthorsList(authors));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (state.authors) {
       fetchAuthorsApi();
@@ -65,7 +83,13 @@ const AuthorProvider = props => {
 
   return (
     <AuthorContext.Provider
-      value={{ state, dispatch, addAuthorApi, fetchAuthorApi }}
+      value={{
+        state,
+        dispatch,
+        addAuthorApi,
+        fetchAuthorApi,
+        fetchAuthorsListApi,
+      }}
     >
       {props.children}
     </AuthorContext.Provider>
