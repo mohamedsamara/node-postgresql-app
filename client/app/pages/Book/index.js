@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router';
 import Select from 'react-select';
 
@@ -31,12 +32,19 @@ const useStyles = makeStyles(theme => ({
   section3: {
     margin: theme.spacing(3, 1, 1),
   },
+  saveBtn: {
+    marginTop: theme.spacing(2),
+    backgroundColor: '#546e7a',
+    color: `${theme.palette.common.white}`,
+    '&:hover': {
+      color: `${theme.palette.common.black}`,
+    },
+  },
 }));
 
 const Book = () => {
   const context = useContext(BookContext);
   const authorContext = useContext(AuthorContext);
-  // console.log('context2', authorContext);
 
   const { option, setOption } = useAuthorsListState();
 
@@ -75,9 +83,23 @@ const Book = () => {
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
           options={authorContext.state.authorsList}
-          value={option}
+          // value={option}
+          value={
+            option ||
+            authorContext.state.authorsList.filter(
+              x => x.value === context.state.book.author_id,
+            )
+          }
           onChange={setOption}
         />
+        <Button
+          variant="outlined"
+          fullWidth
+          className={classes.saveBtn}
+          onClick={() => context.updateBookApi(context.state.book.id, option)}
+        >
+          Save Book
+        </Button>
       </div>
     </div>
   );

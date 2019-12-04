@@ -47,6 +47,23 @@ const BookProvider = props => {
     }
   };
 
+  // update book api
+  const updateBookApi = async (id, bookData) => {
+    try {
+      const response = await axios.put(`/api/book/${id}`, {
+        author_id: bookData.value,
+      });
+
+      const book = response.data.data;
+
+      if (book) {
+        // dispatch(updateBook(book));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // delete book api
   const deleteBookApi = async (index, id) => {
     try {
@@ -90,6 +107,7 @@ const BookProvider = props => {
         deleteBookApi,
         toggleBookCard,
         fetchBookApi,
+        updateBookApi,
       }}
     >
       {props.children}
