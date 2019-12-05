@@ -30,6 +30,23 @@ class AuthorService {
     }
   }
 
+  static async updateAuthor(id, newAuthor) {
+    try {
+      const authorToUpdate = await database.author.findOne({
+        where: { id: Number(id) },
+      });
+
+      if (authorToUpdate) {
+        await database.author.update(newAuthor, { where: { id: Number(id) } });
+
+        return newAuthor;
+      }
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getAuthor(id) {
     try {
       const author = await database.author.findOne({
@@ -38,6 +55,10 @@ class AuthorService {
           {
             model: database.book,
             as: 'books',
+            attributes: [
+              ['id', 'value'],
+              ['title', 'label'],
+            ],
           },
         ],
       });

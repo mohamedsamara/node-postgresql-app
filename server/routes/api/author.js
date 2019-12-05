@@ -8,5 +8,6 @@ router.get('/', authorController.getAuthors);
 router.get('/list', authorController.getAuthorsList);
 router.post('/', authorController.addAuthor);
 router.get('/:id', authorController.getAuthor);
+router.put('/:id', authorController.updateAuthor);
 
 export default router;

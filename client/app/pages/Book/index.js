@@ -83,7 +83,6 @@ const Book = () => {
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
           options={authorContext.state.authorsList}
-          // value={option}
           value={
             option ||
             authorContext.state.authorsList.filter(

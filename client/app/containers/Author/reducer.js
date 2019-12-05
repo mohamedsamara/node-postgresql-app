@@ -5,6 +5,7 @@ import {
   ADD_AUTHOR,
   FETCH_AUTHOR,
   FETCH_AUTHOR_LIST,
+  HANDLE_AUTHOR,
 } from './constant';
 
 const initialState = {
@@ -46,6 +47,17 @@ const authorReducer = (state = initialState, action) => {
           $set: action.payload,
         },
       });
+      return newState;
+
+    case HANDLE_AUTHOR:
+      newState = update(state, {
+        author: {
+          books: {
+            $merge: action.payload,
+          },
+        },
+      });
+      console.log('newState', newState);
       return newState;
 
     default:

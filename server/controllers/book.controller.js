@@ -19,6 +19,21 @@ class BookController {
     }
   }
 
+  static async getBooksList(req, res) {
+    try {
+      const books = await BookService.getBooksList();
+      if (books.length > 0) {
+        responder.setSuccess(200, 'books are successfully retrieved', books);
+      } else {
+        responder.setSuccess(200, 'No books found');
+      }
+      return responder.send(res);
+    } catch (error) {
+      responder.setError(400, error);
+      return responder.send(res);
+    }
+  }
+
   static async addBook(req, res) {
     if (!req.body.title || !req.body.price || !req.body.description) {
       responder.setError(400, 'some details are missing');

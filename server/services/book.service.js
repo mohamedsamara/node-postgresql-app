@@ -9,6 +9,27 @@ class BookService {
     }
   }
 
+  static async getBooksList() {
+    try {
+      return await database.book.findAll({
+        attributes: [
+          ['id', 'value'],
+          ['title', 'label'],
+        ],
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async addAuthor(newAuthor) {
+    try {
+      return await database.author.create(newAuthor);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addBook(newBook) {
     try {
       return await database.book.create(newBook);

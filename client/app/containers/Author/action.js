@@ -3,6 +3,7 @@ import {
   ADD_AUTHOR,
   FETCH_AUTHOR,
   FETCH_AUTHOR_LIST,
+  HANDLE_AUTHOR,
 } from './constant';
 
 export const fetchAuthors = authors => {
@@ -30,5 +31,12 @@ export const fetchAuthorsList = authors => {
   return {
     type: FETCH_AUTHOR_LIST,
     payload: authors,
+  };
+};
+
+export const handleAuthor = author => {
+  return {
+    type: HANDLE_AUTHOR,
+    payload: author,
   };
 };

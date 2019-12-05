@@ -7,6 +7,7 @@ import {
   addAuthor,
   fetchAuthor,
   fetchAuthorsList,
+  handleAuthor,
 } from './action';
 import { initialState, authorReducer } from './reducer';
 
@@ -45,6 +46,23 @@ const AuthorProvider = props => {
     }
   };
 
+  // update author api
+  const updateAuthorApi = async (id, authorData) => {
+    try {
+      const response = await axios.put(`/api/author/${id}`, {
+        author_id: authorData.value,
+      });
+
+      const author = response.data.data;
+
+      if (author) {
+        // dispatch(updateAuthor(author));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // fetch authors api
   const fetchAuthorsApi = async () => {
     try {
@@ -75,6 +93,12 @@ const AuthorProvider = props => {
     }
   };
 
+  const handleAuthorData = value => {
+    console.log('value', value);
+
+    dispatch(handleAuthor(value));
+  };
+
   useEffect(() => {
     if (state.authors) {
       fetchAuthorsApi();
@@ -89,6 +113,8 @@ const AuthorProvider = props => {
         addAuthorApi,
         fetchAuthorApi,
         fetchAuthorsListApi,
+        updateAuthorApi,
+        handleAuthorData,
       }}
     >
       {props.children}
