@@ -5,6 +5,7 @@ import {
   TOGGLE_BOOK_CARD,
   FETCH_BOOK,
   FETCH_BOOK_LIST,
+  HANDLE_BOOK,
 } from './constant';
 
 export const fetchBooks = books => {
@@ -46,5 +47,12 @@ export const fetchBooksList = books => {
   return {
     type: FETCH_BOOK_LIST,
     payload: books,
+  };
+};
+
+export const handleBook = book => {
+  return {
+    type: HANDLE_BOOK,
+    payload: book,
   };
 };

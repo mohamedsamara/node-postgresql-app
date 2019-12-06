@@ -11,8 +11,6 @@ import Select from 'react-select';
 import { BookContext } from '../../containers/Book/context';
 import { AuthorContext } from '../../containers/Author/context';
 
-import useAuthorsListState from '../../hooks/useAuthorsListState';
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -45,8 +43,6 @@ const useStyles = makeStyles(theme => ({
 const Book = () => {
   const context = useContext(BookContext);
   const authorContext = useContext(AuthorContext);
-
-  const { option, setOption } = useAuthorsListState();
 
   const classes = useStyles();
 
@@ -83,19 +79,14 @@ const Book = () => {
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
           options={authorContext.state.authorsList}
-          value={
-            option ||
-            authorContext.state.authorsList.filter(
-              x => x.value === context.state.book.author_id,
-            )
-          }
-          onChange={setOption}
+          value={context.state.book.author}
+          onChange={context.handleBookData}
         />
         <Button
           variant="outlined"
           fullWidth
           className={classes.saveBtn}
-          onClick={() => context.updateBookApi(context.state.book.id, option)}
+          onClick={() => context.updateBookApi(context.state.book)}
         >
           Save Book
         </Button>

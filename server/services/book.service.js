@@ -3,7 +3,15 @@ import database from '../models';
 class BookService {
   static async getBooks() {
     try {
-      return await database.book.findAll();
+      return await database.book.findAll({
+        attributes: { exclude: ['author_id'] },
+        include: [
+          {
+            model: database.author,
+            attributes: ['id', 'name'],
+          },
+        ],
+      });
     } catch (error) {
       throw error;
     }
@@ -59,6 +67,16 @@ class BookService {
     try {
       const book = await database.book.findOne({
         where: { id: Number(id) },
+        attributes: { exclude: ['author_id'] },
+        include: [
+          {
+            model: database.author,
+            attributes: [
+              ['id', 'value'],
+              ['name', 'label'],
+            ],
+          },
+        ],
       });
 
       return book;

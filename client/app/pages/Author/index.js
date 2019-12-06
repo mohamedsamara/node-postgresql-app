@@ -90,7 +90,7 @@ const Author = () => {
         variant="outlined"
         fullWidth
         className={classes.saveBtn}
-        onClick={() => context.updateAuthorApi()}
+        onClick={() => context.updateAuthorApi(context.state.author)}
       >
         Save Author
       </Button>

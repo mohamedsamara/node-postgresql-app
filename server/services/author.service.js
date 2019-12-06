@@ -31,13 +31,29 @@ class AuthorService {
   }
 
   static async updateAuthor(id, newAuthor) {
+    console.log('newAuthor', newAuthor);
+
     try {
       const authorToUpdate = await database.author.findOne({
         where: { id: Number(id) },
       });
 
       if (authorToUpdate) {
-        await database.author.update(newAuthor, { where: { id: Number(id) } });
+        await database.author.updateAttributes(
+          {
+            name: newAuthor.name,
+            books: newAuthor.books || authorToUpdate.books,
+          },
+          {
+            where: { id: Number(id) },
+            include: [
+              {
+                model: database.book,
+                as: 'books',
+              },
+            ],
+          },
+        );
 
         return newAuthor;
       }

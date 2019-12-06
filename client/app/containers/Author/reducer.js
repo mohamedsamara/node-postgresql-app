@@ -57,7 +57,6 @@ const authorReducer = (state = initialState, action) => {
           },
         },
       });
-      console.log('newState', newState);
       return newState;
 
     default:

@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { AuthorContext } from '../../containers/Author/context';
 
@@ -32,12 +32,7 @@ const AuthorList = () => {
     <Grid container spacing={3}>
       {context.state.authors.map((author, index) => (
         <Grid key={index} item xs={12} sm={6} md={4}>
-          <NavLink
-            to={`/author/${author.id}`}
-            activeClassName="active-link"
-            className={classes.menuLink}
-            exact
-          >
+          <Link to={`/author/${author.id}`} className={classes.menuLink}>
             <Card className={classes.card}>
               <CardHeader
                 avatar={
@@ -48,7 +43,7 @@ const AuthorList = () => {
                 title={author.name}
               />
             </Card>
-          </NavLink>
+          </Link>
         </Grid>
       ))}
     </Grid>

@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { BookContext } from '../../containers/Book/context';
 
@@ -52,6 +52,10 @@ const useStyles = makeStyles(theme => ({
     color: `${theme.palette.text.primary}`,
     margin: theme.spacing(1),
   },
+  authorLink: {
+    color: `${theme.palette.text.primary}`,
+    textDecoration: 'none',
+  },
 }));
 
 const BookList = () => {
@@ -66,26 +70,43 @@ const BookList = () => {
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                  R
+                  {(book.author && book.author.name.charAt(0)) || 'R'}
                 </Avatar>
               }
               action={
-                <NavLink
-                  to={`/book/${book.id}`}
-                  activeClassName="active-link"
-                  className={classes.editLink}
-                  exact
-                >
+                <Link to={`/book/${book.id}`} className={classes.editLink}>
                   <EditIcon size="small" />
-                </NavLink>
+                </Link>
               }
               title={book.title}
               subheader={new Date(book.createdAt).toLocaleString()}
             />
             <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {book.title}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                display="inline"
+              >
+                {`${book.title} `}
               </Typography>
+
+              {book.author && (
+                <Typography
+                  variant="caption"
+                  color="textSecondary"
+                  component="span"
+                  display="inline"
+                >
+                  <strong>by</strong>
+                  <Link
+                    to={`/author/${book.author.id}`}
+                    className={classes.authorLink}
+                  >
+                    {` ${book.author.name}`}
+                  </Link>
+                </Typography>
+              )}
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">

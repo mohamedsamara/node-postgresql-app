@@ -47,11 +47,14 @@ const AuthorProvider = props => {
   };
 
   // update author api
-  const updateAuthorApi = async (id, authorData) => {
+  const updateAuthorApi = async authorData => {
+    console.log(authorData);
+
     try {
-      const response = await axios.put(`/api/author/${id}`, {
-        author_id: authorData.value,
-      });
+      const response = await axios.put(
+        `/api/author/${authorData.id}`,
+        authorData,
+      );
 
       const author = response.data.data;
 
@@ -94,8 +97,6 @@ const AuthorProvider = props => {
   };
 
   const handleAuthorData = value => {
-    console.log('value', value);
-
     dispatch(handleAuthor(value));
   };
 

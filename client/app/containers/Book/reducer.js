@@ -7,6 +7,7 @@ import {
   TOGGLE_BOOK_CARD,
   FETCH_BOOK,
   FETCH_BOOK_LIST,
+  HANDLE_BOOK,
 } from './constant';
 
 const initialState = {
@@ -67,6 +68,16 @@ const bookReducer = (state = initialState, action) => {
       newState = update(state, {
         booksList: {
           $set: action.payload,
+        },
+      });
+      return newState;
+
+    case HANDLE_BOOK:
+      newState = update(state, {
+        book: {
+          author: {
+            $set: action.payload,
+          },
         },
       });
       return newState;

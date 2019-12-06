@@ -9,6 +9,7 @@ import {
   toggleBookCard,
   fetchBook,
   fetchBooksList,
+  handleBook,
 } from './action';
 
 import { initialState, bookReducer } from './reducer';
@@ -49,10 +50,10 @@ const BookProvider = props => {
   };
 
   // update book api
-  const updateBookApi = async (id, bookData) => {
+  const updateBookApi = async bookData => {
     try {
-      const response = await axios.put(`/api/book/${id}`, {
-        author_id: bookData.value,
+      const response = await axios.put(`/api/book/${bookData.id}`, {
+        author_id: bookData.author.value,
       });
 
       const book = response.data.data;
@@ -108,6 +109,10 @@ const BookProvider = props => {
     }
   };
 
+  const handleBookData = value => {
+    dispatch(handleBook(value));
+  };
+
   useEffect(() => {
     if (state.books) {
       fetchBooksApi();
@@ -125,6 +130,7 @@ const BookProvider = props => {
         fetchBookApi,
         updateBookApi,
         fetchBookListApi,
+        handleBookData,
       }}
     >
       {props.children}

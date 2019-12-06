@@ -4,3 +4,4 @@ export const DELETE_BOOK = 'DELETE_BOOK';
 export const TOGGLE_BOOK_CARD = 'TOGGLE_BOOK_CARD';
 export const FETCH_BOOK = 'FETCH_BOOK';
 export const FETCH_BOOK_LIST = 'FETCH_BOOK_LIST';
+export const HANDLE_BOOK = 'HANDLE_BOOK';
