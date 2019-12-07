@@ -49,10 +49,8 @@ const AuthorProvider = props => {
   // update author api
   const updateAuthorApi = async authorData => {
     const newAuthorData = authorData.books.map(book => {
-      return { id: book.value, name: book.label };
+      return book.value;
     });
-
-    console.log(newAuthorData);
 
     // eslint-disable-next-line no-param-reassign
     authorData.books = [...newAuthorData];
