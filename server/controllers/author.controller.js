@@ -105,6 +105,29 @@ class AuthorController {
       return responder.send(res);
     }
   }
+
+  static async deleteAuthor(req, res) {
+    const { id } = req.params;
+
+    if (!Number(id)) {
+      responder.setError(400, 'please enter a valid numeric value');
+      return responder.send(res);
+    }
+
+    try {
+      const authorToDelete = await AuthorService.deleteAuthor(id);
+
+      if (authorToDelete) {
+        responder.setSuccess(200, 'author has been deleted successfully');
+      } else {
+        responder.setError(404, `author with the id ${id} cannot be found`);
+      }
+      return responder.send(res);
+    } catch (error) {
+      responder.setError(400, error);
+      return responder.send(res);
+    }
+  }
 }
 
 export default AuthorController;

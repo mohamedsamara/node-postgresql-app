@@ -78,6 +78,24 @@ class AuthorService {
       throw error;
     }
   }
+
+  static async deleteAuthor(id) {
+    try {
+      const authorToDelete = await database.book.findOne({
+        where: { id: Number(id) },
+      });
+
+      if (authorToDelete) {
+        const deletedAuthor = await database.author.destroy({
+          where: { id: Number(id) },
+        });
+        return deletedAuthor;
+      }
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default AuthorService;
