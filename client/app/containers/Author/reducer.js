@@ -53,7 +53,7 @@ const authorReducer = (state = initialState, action) => {
       newState = update(state, {
         author: {
           books: {
-            $merge: action.payload,
+            $set: action.payload,
           },
         },
       });

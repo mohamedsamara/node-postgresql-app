@@ -31,29 +31,35 @@ class AuthorService {
   }
 
   static async updateAuthor(id, newAuthor) {
-    console.log('newAuthor', newAuthor);
-
     try {
       const authorToUpdate = await database.author.findOne({
         where: { id: Number(id) },
+        include: [
+          {
+            model: database.book,
+            as: 'books',
+            attributes: [
+              ['id', 'value'],
+              ['title', 'label'],
+            ],
+          },
+        ],
       });
 
       if (authorToUpdate) {
-        await database.author.updateAttributes(
-          {
-            name: newAuthor.name,
-            books: newAuthor.books || authorToUpdate.books,
-          },
-          {
-            where: { id: Number(id) },
-            include: [
-              {
-                model: database.book,
-                as: 'books',
-              },
-            ],
-          },
-        );
+        await database.author.update(newAuthor, {
+          where: { id: Number(id) },
+          include: [
+            {
+              model: database.book,
+              as: 'books',
+              attributes: [
+                ['id', 'value'],
+                ['title', 'label'],
+              ],
+            },
+          ],
+        });
 
         return newAuthor;
       }
@@ -62,6 +68,32 @@ class AuthorService {
       throw error;
     }
   }
+
+  // static async updateAuthor(id) {
+  //   const newAuthor = [2, 4, 5];
+
+  //   try {
+  //     database.book
+  //       .findAll({
+  //         where: { id: { $in: newAuthor } },
+  //       })
+  //       .then(books => {
+  //         console.log('books are =>', books);
+
+  //         const updateBooksPromises = books.map(book => {
+  //           return book.updateAttributes({
+  //             author_id: id,
+  //           });
+  //         });
+  //         return database.Sequelize.Promise.all(updateBooksPromises);
+  //       })
+  //       .then(updateBooks => {
+  //         return updateBooks;
+  //       });
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   static async getAuthor(id) {
     try {
