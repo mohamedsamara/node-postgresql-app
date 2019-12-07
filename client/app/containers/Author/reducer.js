@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 import {
   FETCH_AUTHORS,
   ADD_AUTHOR,
+  DELETE_AUTHOR,
   FETCH_AUTHOR,
   FETCH_AUTHOR_LIST,
   HANDLE_AUTHOR,
@@ -29,6 +30,14 @@ const authorReducer = (state = initialState, action) => {
       newState = update(state, {
         authors: {
           $unshift: [action.payload],
+        },
+      });
+      return newState;
+
+    case DELETE_AUTHOR:
+      newState = update(state, {
+        authors: {
+          $splice: [[action.payload, 1]],
         },
       });
       return newState;

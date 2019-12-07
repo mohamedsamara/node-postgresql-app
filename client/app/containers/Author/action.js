@@ -1,6 +1,7 @@
 import {
   FETCH_AUTHORS,
   ADD_AUTHOR,
+  DELETE_AUTHOR,
   FETCH_AUTHOR,
   FETCH_AUTHOR_LIST,
   HANDLE_AUTHOR,
@@ -17,6 +18,13 @@ export const addAuthor = author => {
   return {
     type: ADD_AUTHOR,
     payload: author,
+  };
+};
+
+export const deleteAuthor = index => {
+  return {
+    type: DELETE_AUTHOR,
+    payload: index,
   };
 };
 

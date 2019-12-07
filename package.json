@@ -80,6 +80,7 @@
     "express": "^4.17.1",
     "history": "^4.10.1",
     "immutability-helper": "^3.0.1",
+    "material-ui-popup-state": "^1.4.1",
     "pg": "^7.12.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

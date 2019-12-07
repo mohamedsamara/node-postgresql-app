@@ -81,7 +81,7 @@ class AuthorService {
 
   static async deleteAuthor(id) {
     try {
-      const authorToDelete = await database.book.findOne({
+      const authorToDelete = await database.author.findOne({
         where: { id: Number(id) },
       });
 

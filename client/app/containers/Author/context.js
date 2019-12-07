@@ -5,6 +5,7 @@ import axios from 'axios';
 import {
   fetchAuthors,
   addAuthor,
+  deleteAuthor,
   fetchAuthor,
   fetchAuthorsList,
   handleAuthor,
@@ -71,6 +72,19 @@ const AuthorProvider = props => {
     }
   };
 
+  // delete author api
+  const deleteAuthorApi = async (index, id) => {
+    try {
+      const response = await axios.delete(`/api/author/${id}`);
+
+      if (response.status === 200) {
+        dispatch(deleteAuthor(index));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // fetch authors api
   const fetchAuthorsApi = async () => {
     try {
@@ -117,6 +131,7 @@ const AuthorProvider = props => {
         state,
         dispatch,
         addAuthorApi,
+        deleteAuthorApi,
         fetchAuthorApi,
         fetchAuthorsListApi,
         updateAuthorApi,
