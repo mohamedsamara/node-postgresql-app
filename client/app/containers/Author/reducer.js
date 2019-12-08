@@ -66,6 +66,7 @@ const authorReducer = (state = initialState, action) => {
           },
         },
       });
+
       return newState;
 
     default:

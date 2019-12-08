@@ -53,13 +53,13 @@ const AuthorProvider = props => {
       return book.value;
     });
 
-    // eslint-disable-next-line no-param-reassign
-    authorData.books = [...newAuthorData];
+    const updatedAuthor = { ...authorData };
+    updatedAuthor.books = [...newAuthorData];
 
     try {
       const response = await axios.put(
-        `/api/author/${authorData.id}`,
-        authorData,
+        `/api/author/${updatedAuthor.id}`,
+        updatedAuthor,
       );
 
       const author = response.data.data;
