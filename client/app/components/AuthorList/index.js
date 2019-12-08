@@ -33,7 +33,12 @@ const useStyles = makeStyles(theme => ({
   deleteText: {
     cursor: 'pointer',
   },
+  deleteDetails: {
+    fontSize: 12,
+    marginBottom: 4,
+  },
   deleteBtn: {
+    fontSize: 12,
     backgroundColor: '#f44336',
     color: `${theme.palette.common.white}`,
   },
@@ -83,6 +88,13 @@ const AuthorList = () => {
                       }}
                     >
                       <Box p={2}>
+                        <Typography
+                          className={classes.deleteDetails}
+                          component="p"
+                        >
+                          Deleting this author will delete their associated
+                          books?
+                        </Typography>
                         <Button
                           variant="contained"
                           fullWidth

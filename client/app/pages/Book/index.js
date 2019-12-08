@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 1, 1),
   },
   saveBtn: {
+    fontSize: 12,
+    textTransform: 'capitalize',
     marginTop: theme.spacing(2),
     backgroundColor: '#546e7a',
     color: `${theme.palette.common.white}`,

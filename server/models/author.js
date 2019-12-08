@@ -10,7 +10,6 @@ const Author = (sequelize, DataTypes) => {
     author.hasMany(models.book, {
       foreignKey: 'author_id',
       as: 'books',
-      // onDelete: 'CASCADE',
     });
   };
 

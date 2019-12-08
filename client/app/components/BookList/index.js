@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500],
   },
   deleteBtn: {
+    fontSize: 12,
     backgroundColor: '#f44336',
     color: `${theme.palette.common.white}`,
   },
