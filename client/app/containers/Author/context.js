@@ -49,9 +49,12 @@ const AuthorProvider = props => {
 
   // update author api
   const updateAuthorApi = async authorData => {
-    const newAuthorData = authorData.books.map(book => {
-      return book.value;
-    });
+    let newAuthorData;
+    if (authorData.books) {
+      newAuthorData = authorData.books.map(book => {
+        return book.value;
+      });
+    }
 
     const updatedAuthor = { ...authorData };
     updatedAuthor.books = [...newAuthorData];

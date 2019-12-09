@@ -30,22 +30,25 @@ class AuthorService {
     }
   }
 
-  static async updateBook(id, newAuthor) {
-    console.log('is here');
-
+  static async updateAuthorBooks(id, newAuthor) {
     try {
       await database.book
         .findAll({
-          where: { id: newAuthor.books },
+          where: {
+            [database.Sequelize.Op.or]: [
+              { id: newAuthor.books },
+              { author_id: id },
+            ],
+          },
         })
         .then(books => {
           return database.Sequelize.Promise.all(
             books.map(async book => {
-              // if there is any other book with the same author id but not in the provided list of updated books =>
-              // then need to deleted that book
-
-              // update books
-              await book.update({ author_id: id });
+              if (!newAuthor.books.includes(book.id)) {
+                await book.update({ author_id: null });
+              } else {
+                await book.update({ author_id: Number(id) });
+              }
             }),
           );
         });
@@ -62,8 +65,6 @@ class AuthorService {
 
       if (authorToUpdate) {
         await database.author.update(newAuthor, { where: { id: Number(id) } });
-
-        this.updateBook(id, newAuthor);
 
         return newAuthor;
       }

@@ -71,6 +71,10 @@ class AuthorController {
     }
     try {
       const updatedAuthor = await AuthorService.updateAuthor(id, newAuthor);
+      const updatedAuthorBooks = await AuthorService.updateAuthorBooks(
+        id,
+        newAuthor,
+      );
       if (!updatedAuthor) {
         responder.setError(404, `cannot find author with the id: ${id}`);
       } else {
