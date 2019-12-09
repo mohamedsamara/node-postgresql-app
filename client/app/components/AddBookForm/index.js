@@ -32,7 +32,7 @@ const AddBookForm = () => {
         autoComplete="off"
         autoFocus
         fullWidth
-        label="Title"
+        label="book title"
         name="title"
         placeholder="Book Name"
         margin="normal"
@@ -43,7 +43,7 @@ const AddBookForm = () => {
         fullWidth
         multiline
         rowsMax="4"
-        label="Description"
+        label="book description"
         name="description"
         placeholder="Book Description"
         margin="normal"
@@ -54,7 +54,7 @@ const AddBookForm = () => {
       <TextField
         autoComplete="off"
         fullWidth
-        label="Price"
+        label="book price"
         name="price"
         placeholder="Book Price"
         onChange={onChange}

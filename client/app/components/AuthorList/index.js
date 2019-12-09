@@ -30,7 +30,9 @@ const useStyles = makeStyles(theme => ({
     color: `${theme.palette.text.primary}`,
     textDecoration: 'none',
   },
-  deleteText: {
+  deleteBtnText: {
+    fontSize: 12,
+    textTransform: 'capitalize',
     cursor: 'pointer',
   },
   deleteDetails: {
@@ -57,7 +59,7 @@ const AuthorList = () => {
               <CardHeader
                 className={classes.cardHeader}
                 avatar={
-                  <Avatar aria-label="recipe" className={classes.avatar}>
+                  <Avatar aria-label={author.name} className={classes.avatar}>
                     {author.name.charAt(0)}
                   </Avatar>
                 }
@@ -68,14 +70,13 @@ const AuthorList = () => {
               <PopupState variant="popover" popupId="demo-popup-popover">
                 {popupState => (
                   <div>
-                    <Typography
+                    <Button
                       {...bindTrigger(popupState)}
-                      variant="caption"
-                      className={classes.deleteText}
-                      component="p"
+                      className={classes.deleteBtnText}
+                      tabIndex={0}
                     >
                       Delete this author?
-                    </Typography>
+                    </Button>
                     <Popover
                       {...bindPopover(popupState)}
                       anchorOrigin={{

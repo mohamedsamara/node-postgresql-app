@@ -158,7 +158,7 @@ const Layout = props => {
           <NavLink
             to={'/'}
             activeClassName="active-link"
-            className={classes.menuLink}
+            className={`${classes.menuLink} menu-link`}
             exact
           >
             <ListItem button key={'Home'}>
@@ -171,7 +171,7 @@ const Layout = props => {
           <NavLink
             to={'/book/list'}
             activeClassName="active-link"
-            className={classes.menuLink}
+            className={`${classes.menuLink} menu-link`}
             exact
           >
             <ListItem button key={'Books'}>
@@ -184,7 +184,7 @@ const Layout = props => {
           <NavLink
             to={'/book/add'}
             activeClassName="active-link"
-            className={classes.menuLink}
+            className={`${classes.menuLink} menu-link`}
             exact
           >
             <ListItem button key={'Add Book'}>
@@ -200,7 +200,7 @@ const Layout = props => {
           <NavLink
             to={'/author/list'}
             activeClassName="active-link"
-            className={classes.menuLink}
+            className={`${classes.menuLink} menu-link`}
             exact
           >
             <ListItem button key={'Authors'}>
@@ -213,7 +213,7 @@ const Layout = props => {
           <NavLink
             to={'/author/add'}
             activeClassName="active-link"
-            className={classes.menuLink}
+            className={`${classes.menuLink} menu-link`}
             exact
           >
             <ListItem button key={'Add Author'}>

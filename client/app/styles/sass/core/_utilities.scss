@@ -10,3 +10,11 @@
     }
   }
 }
+
+.menu-link.active-link {
+  color: $theme-primary;
+
+  span {
+    font-weight: 600;
+  }
+}

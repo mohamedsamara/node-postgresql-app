@@ -22,7 +22,7 @@ const AddAuthorForm = () => {
         autoComplete="off"
         autoFocus
         fullWidth
-        label="Author"
+        label="author name"
         placeholder="Author Name"
         margin="normal"
         value={value}
