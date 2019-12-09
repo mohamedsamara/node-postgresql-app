@@ -17,6 +17,16 @@
     "type": "git",
     "url": "git+https://github.com/mohamedsamara/node-postgresql-app.git"
   },
+  "keywords": [
+    "node",
+    "express",
+    "sequelize",
+    "postgresql",
+    "react",
+    "webpack",
+    "eslint",
+    "material-ui"
+  ],
   "author": "Mohamed Samara (https://github.com/mohamedsamara)",
   "license": "ISC",
   "bugs": {
