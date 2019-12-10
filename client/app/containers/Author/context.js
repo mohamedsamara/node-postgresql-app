@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 
 import axios from 'axios';
 
@@ -50,14 +50,17 @@ const AuthorProvider = props => {
   // update author api
   const updateAuthorApi = async authorData => {
     let newAuthorData;
+    const updatedAuthor = { ...authorData };
+
     if (authorData.books) {
       newAuthorData = authorData.books.map(book => {
         return book.value;
       });
-    }
 
-    const updatedAuthor = { ...authorData };
-    updatedAuthor.books = [...newAuthorData];
+      updatedAuthor.books = [...newAuthorData];
+    } else {
+      updatedAuthor.books = [];
+    }
 
     try {
       const response = await axios.put(
@@ -122,12 +125,6 @@ const AuthorProvider = props => {
     dispatch(handleAuthor(value));
   };
 
-  useEffect(() => {
-    if (state.authors) {
-      fetchAuthorsApi();
-    }
-  }, []);
-
   return (
     <AuthorContext.Provider
       value={{
@@ -135,6 +132,7 @@ const AuthorProvider = props => {
         dispatch,
         addAuthorApi,
         deleteAuthorApi,
+        fetchAuthorsApi,
         fetchAuthorApi,
         fetchAuthorsListApi,
         updateAuthorApi,

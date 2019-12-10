@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 
 import axios from 'axios';
 
@@ -113,17 +113,12 @@ const BookProvider = props => {
     dispatch(handleBook(value));
   };
 
-  useEffect(() => {
-    if (state.books) {
-      fetchBooksApi();
-    }
-  }, []);
-
   return (
     <BookContext.Provider
       value={{
         state,
         dispatch,
+        fetchBooksApi,
         addBookApi,
         deleteBookApi,
         toggleBookCard,

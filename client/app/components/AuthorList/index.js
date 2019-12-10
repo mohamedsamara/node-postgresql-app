@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -49,6 +49,12 @@ const useStyles = makeStyles(theme => ({
 const AuthorList = () => {
   const context = useContext(AuthorContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (context.state.authors) {
+      context.fetchAuthorsApi();
+    }
+  }, []);
 
   return (
     <Grid container spacing={3}>

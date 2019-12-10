@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -58,6 +58,12 @@ const useStyles = makeStyles(theme => ({
 const BookList = () => {
   const context = useContext(BookContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (context.state.books) {
+      context.fetchBooksApi();
+    }
+  }, []);
 
   return (
     <Grid container spacing={3}>
