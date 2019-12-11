@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch, Redirect } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 import routes from '../../utils/routes';
 
@@ -21,7 +21,6 @@ const Application = () => {
             />
           ) : null;
         })}
-        <Redirect from="/" to="/test" />
       </Switch>
     </Layout>
   );
