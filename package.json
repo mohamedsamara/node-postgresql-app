@@ -9,8 +9,8 @@
     "dev": "babel -d ./dist server",
     "start": "npm run clean && npm run dev && cross-env NODE_ENV=development nodemon index.js",
     "production": "npm run clean && npm run dev && npm run build && cross-env NODE_ENV=production node index.js",
-    "lint": "eslint *.js --ignore-path .eslintignore",
-    "lint:fix": "eslint *.js --fix --ignore-path .eslintignore",
+    "lint": "eslint **/*.js --ignore-path .eslintignore",
+    "lint:fix": "eslint **/*.js --fix --ignore-path .eslintignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

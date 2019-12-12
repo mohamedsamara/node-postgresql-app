@@ -50,6 +50,7 @@ const AuthorList = () => {
   const context = useContext(AuthorContext);
   const classes = useStyles();
 
+  // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     if (context.state.authors) {
       context.fetchAuthorsApi();

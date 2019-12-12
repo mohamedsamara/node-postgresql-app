@@ -53,7 +53,7 @@ const Book = () => {
   useEffect(() => {
     context.fetchBookApi(id);
     authorContext.fetchAuthorsListApi();
-  }, []);
+  }, [id]);
 
   return (
     <div className={classes.root}>

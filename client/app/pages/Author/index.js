@@ -54,7 +54,7 @@ const Author = () => {
   useEffect(() => {
     context.fetchAuthorApi(id);
     bookContext.fetchBookListApi();
-  }, []);
+  }, [id]);
 
   return (
     <div className={classes.root}>

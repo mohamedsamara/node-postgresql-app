@@ -59,6 +59,7 @@ const BookList = () => {
   const context = useContext(BookContext);
   const classes = useStyles();
 
+  // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     if (context.state.books) {
       context.fetchBooksApi();

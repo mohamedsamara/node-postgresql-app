@@ -1,17 +1,21 @@
 .page404 {
-  p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+  @include flex();
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 25px;
+  background-color: $white;
+  min-height: 250px;
 
   .list {
     padding-left: 25px;
+    flex-grow: 1;
+    margin: 0;
   }
 
   a {
     color: $theme-primary;
     text-decoration: none;
+    flex-grow: 1;
 
     &:hover {
       text-decoration: underline;
