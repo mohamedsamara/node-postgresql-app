@@ -61,9 +61,16 @@ const BookList = () => {
 
   // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    let subscribe = false;
+
     if (context.state.books) {
+      subscribe = true;
       context.fetchBooksApi();
     }
+    return () => {
+      subscribe = false;
+    };
   }, []);
 
   return (

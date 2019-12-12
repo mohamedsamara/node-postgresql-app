@@ -52,9 +52,16 @@ const AuthorList = () => {
 
   // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    let subscribe = false;
+
     if (context.state.authors) {
       context.fetchAuthorsApi();
     }
+
+    return () => {
+      subscribe = false;
+    };
   }, []);
 
   return (
