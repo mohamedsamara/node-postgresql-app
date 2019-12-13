@@ -20,6 +20,8 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 
+import NoData from '../NoData';
+
 import { BookContext } from '../../containers/Book/context';
 
 const useStyles = makeStyles(theme => ({
@@ -53,6 +55,9 @@ const useStyles = makeStyles(theme => ({
     color: `${theme.palette.text.primary}`,
     textDecoration: 'none',
   },
+  emptyBooks: {
+    padding: theme.spacing(3, 2),
+  },
 }));
 
 const BookList = () => {
@@ -75,85 +80,93 @@ const BookList = () => {
 
   return (
     <Grid container spacing={3}>
-      {context.state.books.map((book, index) => (
-        <Grid key={index} item xs={12} sm={6} md={4}>
-          <Card className={classes.card}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  {(book.author && book.author.name.charAt(0)) || 'R'}
-                </Avatar>
-              }
-              action={
-                <Link to={`/book/${book.id}`} className={classes.editLink}>
-                  <EditIcon size="small" />
-                </Link>
-              }
-              title={book.title}
-              subheader={new Date(book.createdAt).toLocaleString()}
-            />
-            <CardContent>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                display="inline"
-              >
-                {`${book.title} `}
-              </Typography>
-
-              {book.author && (
+      {context.state.books.length > 0 ? (
+        context.state.books.map((book, index) => (
+          <Grid key={index} item xs={12} sm={6} md={4}>
+            <Card className={classes.card}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    {(book.author && book.author.name.charAt(0)) || 'R'}
+                  </Avatar>
+                }
+                action={
+                  <Link to={`/book/${book.id}`} className={classes.editLink}>
+                    <EditIcon size="small" />
+                  </Link>
+                }
+                title={book.title}
+                subheader={new Date(book.createdAt).toLocaleString()}
+              />
+              <CardContent>
                 <Typography
-                  variant="caption"
+                  variant="body2"
                   color="textSecondary"
-                  component="span"
+                  component="p"
                   display="inline"
                 >
-                  <strong>by</strong>
-                  <Link
-                    to={`/author/${book.author.id}`}
-                    className={classes.authorLink}
-                  >
-                    {` ${book.author.name}`}
-                  </Link>
+                  {`${book.title} `}
                 </Typography>
-              )}
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="share">
-                <ShareIcon />
-              </IconButton>
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: book.isCardOpen,
-                })}
-                onClick={() => context.dispatch(context.toggleBookCard(index))}
-                aria-expanded={book.isCardOpen}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse in={book.isCardOpen} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>{book.description}</Typography>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  className={classes.deleteBtn}
-                  startIcon={<DeleteIcon />}
-                  onClick={() => context.deleteBookApi(index, book.id)}
-                >
-                  Delete
-                </Button>
+
+                {book.author && (
+                  <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    component="span"
+                    display="inline"
+                  >
+                    <strong>by</strong>
+                    <Link
+                      to={`/author/${book.author.id}`}
+                      className={classes.authorLink}
+                    >
+                      {` ${book.author.name}`}
+                    </Link>
+                  </Typography>
+                )}
               </CardContent>
-            </Collapse>
-          </Card>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: book.isCardOpen,
+                  })}
+                  onClick={() =>
+                    context.dispatch(context.toggleBookCard(index))
+                  }
+                  aria-expanded={book.isCardOpen}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={book.isCardOpen} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>{book.description}</Typography>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    className={classes.deleteBtn}
+                    startIcon={<DeleteIcon />}
+                    onClick={() => context.deleteBookApi(index, book.id)}
+                  >
+                    Delete
+                  </Button>
+                </CardContent>
+              </Collapse>
+            </Card>
+          </Grid>
+        ))
+      ) : (
+        <Grid item xs={12} sm={12} md={12}>
+          <NoData details={'There is no books yet!'} />
         </Grid>
-      ))}
+      )}
     </Grid>
   );
 };

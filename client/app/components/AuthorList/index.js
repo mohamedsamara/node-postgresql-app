@@ -13,8 +13,9 @@ import Box from '@material-ui/core/Box';
 import { red } from '@material-ui/core/colors';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-
 import { Link } from 'react-router-dom';
+
+import NoData from '../NoData';
 
 import { AuthorContext } from '../../containers/Author/context';
 
@@ -44,6 +45,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#f44336',
     color: `${theme.palette.common.white}`,
   },
+  emptyAuthors: {
+    padding: theme.spacing(3, 2),
+  },
 }));
 
 const AuthorList = () => {
@@ -66,70 +70,76 @@ const AuthorList = () => {
 
   return (
     <Grid container spacing={3}>
-      {context.state.authors.map((author, index) => (
-        <Grid key={index} item xs={12} sm={6} md={4}>
-          <Card>
-            <Link to={`/author/${author.id}`} className={classes.authorLink}>
-              <CardHeader
-                className={classes.cardHeader}
-                avatar={
-                  <Avatar aria-label={author.name} className={classes.avatar}>
-                    {author.name.charAt(0)}
-                  </Avatar>
-                }
-                title={author.name}
-              />
-            </Link>
-            <CardActions disableSpacing>
-              <PopupState variant="popover" popupId="demo-popup-popover">
-                {popupState => (
-                  <div>
-                    <Button
-                      {...bindTrigger(popupState)}
-                      className={classes.deleteBtnText}
-                      tabIndex={0}
-                    >
-                      Delete this author?
-                    </Button>
-                    <Popover
-                      {...bindPopover(popupState)}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                      }}
-                    >
-                      <Box p={2}>
-                        <Typography
-                          className={classes.deleteDetails}
-                          component="p"
-                        >
-                          Deleting this author will delete their associated
-                          books?
-                        </Typography>
-                        <Button
-                          variant="contained"
-                          fullWidth
-                          className={classes.deleteBtn}
-                          startIcon={<DeleteIcon />}
-                          onClick={() =>
-                            context.deleteAuthorApi(index, author.id)
-                          }
-                        >
-                          Delete
-                        </Button>
-                      </Box>
-                    </Popover>
-                  </div>
-                )}
-              </PopupState>
-            </CardActions>
-          </Card>
+      {context.state.authors.length > 0 ? (
+        context.state.authors.map((author, index) => (
+          <Grid key={index} item xs={12} sm={6} md={4}>
+            <Card>
+              <Link to={`/author/${author.id}`} className={classes.authorLink}>
+                <CardHeader
+                  className={classes.cardHeader}
+                  avatar={
+                    <Avatar aria-label={author.name} className={classes.avatar}>
+                      {author.name.charAt(0)}
+                    </Avatar>
+                  }
+                  title={author.name}
+                />
+              </Link>
+              <CardActions disableSpacing>
+                <PopupState variant="popover" popupId="demo-popup-popover">
+                  {popupState => (
+                    <div>
+                      <Button
+                        {...bindTrigger(popupState)}
+                        className={classes.deleteBtnText}
+                        tabIndex={0}
+                      >
+                        Delete this author?
+                      </Button>
+                      <Popover
+                        {...bindPopover(popupState)}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'center',
+                        }}
+                      >
+                        <Box p={2}>
+                          <Typography
+                            className={classes.deleteDetails}
+                            component="p"
+                          >
+                            Deleting this author will delete their associated
+                            books?
+                          </Typography>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            className={classes.deleteBtn}
+                            startIcon={<DeleteIcon />}
+                            onClick={() =>
+                              context.deleteAuthorApi(index, author.id)
+                            }
+                          >
+                            Delete
+                          </Button>
+                        </Box>
+                      </Popover>
+                    </div>
+                  )}
+                </PopupState>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))
+      ) : (
+        <Grid item xs={12} sm={12} md={12}>
+          <NoData details={'There is no authors yet!'} />
         </Grid>
-      ))}
+      )}
     </Grid>
   );
 };
