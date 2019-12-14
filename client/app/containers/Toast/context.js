@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect, useRef } from 'react';
 
 import { addToast, removeToast } from './action';
 
@@ -11,12 +11,27 @@ const ToastContext = React.createContext(initialState);
 // toast components
 const ToastContainer = props => <div className="toast-container" {...props} />;
 
-const Toast = ({ children, onDismiss }) => (
-  <div className="toast" onClick={onDismiss}>
-    <div className="edge" />
-    <div className="content">{children}</div>
-  </div>
-);
+const Toast = ({ children, onDismiss }) => {
+  const removeRef = useRef();
+  removeRef.current = onDismiss;
+
+  useEffect(() => {
+    const duration = 1500000;
+    const id = setTimeout(() => removeRef.current(), duration);
+
+    return () => clearTimeout(id);
+  }, []);
+
+  return (
+    <div className="toast">
+      <div className="edge" />
+      <div className="content">{children}</div>
+      <button className="close" onClick={onDismiss}>
+        x
+      </button>
+    </div>
+  );
+};
 
 let toastCounter = 0;
 

@@ -3,10 +3,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 
 import routes from '../../utils/routes';
-
 import Layout from '../../components/Layout';
-// import Toast from '../../components/Toast';
-
 import { ToastProvider } from '../Toast/context';
 
 const Application = () => {

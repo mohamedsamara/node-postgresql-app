@@ -20,8 +20,6 @@
 
   .edge {
     background-color: $theme-primary;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
     color: $white;
     flex-shrink: 0;
     padding-bottom: 4px;
@@ -39,5 +37,23 @@
     line-height: 1.4;
     min-height: 40px;
     padding: 8px 12px;
+  }
+
+  .close {
+    border: none;
+    background-color: transparent;
+    font-size: $font-size-x-large;
+    margin-right: 8px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &:focus {
+      outline: none;
+      opacity: 0.5;
+      font-size: $font-size-medium;
+    }
   }
 }
