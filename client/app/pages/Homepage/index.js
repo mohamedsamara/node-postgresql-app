@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
-
-import { ToastContext } from '../../containers/Toast/context';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,24 +23,13 @@ const useStyles = makeStyles(theme => ({
 
 const Homepage = () => {
   const classes = useStyles();
-  const toastContext = useContext(ToastContext);
 
-  const add = () => {
-    toastContext.add('test', 'success');
-    toastContext.add('test', 'error');
-    toastContext.add('test', 'info');
-    toastContext.add('test', 'warning');
-  };
   return (
     <>
       <Paper className={classes.root}>
         <Typography variant="h5" component="h3">
           Book Application.
         </Typography>
-
-        <button style={{ margin: 10 }} onClick={add}>
-          Add toast
-        </button>
         <Typography component="p">Node PostgreSQL Application</Typography>
       </Paper>
       <div className={classes.chips}>

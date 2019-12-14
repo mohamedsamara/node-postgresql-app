@@ -14,13 +14,13 @@ import {
 
 import { initialState, bookReducer } from './reducer';
 
-// import { useToast } from '../Toast';
+import { useToast } from '../Toast';
 
 const BookContext = React.createContext(initialState);
 
 const BookProvider = props => {
   const [state, dispatch] = useReducer(bookReducer, initialState);
-  // const { add, remove } = useToast();
+  const { add } = useToast();
 
   // add book api
   const addBookApi = async bookData => {
@@ -31,6 +31,7 @@ const BookProvider = props => {
 
       if (book) {
         dispatch(addBook(book));
+        add('test', 'success');
       }
     } catch (error) {
       console.log(error);
