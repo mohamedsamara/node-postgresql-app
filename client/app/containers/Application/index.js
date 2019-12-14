@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router';
 
 import routes from '../../utils/routes';
 import Layout from '../../components/Layout';
-import { ToastProvider } from '../Toast/context';
+import { ToastProvider } from '../Toast';
 
 const Application = () => {
   return (

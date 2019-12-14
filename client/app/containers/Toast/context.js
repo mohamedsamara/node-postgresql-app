@@ -16,7 +16,7 @@ const Toast = ({ children, onDismiss }) => {
   removeRef.current = onDismiss;
 
   useEffect(() => {
-    const duration = 1500000;
+    const duration = 5000;
     const id = setTimeout(() => removeRef.current(), duration);
 
     return () => clearTimeout(id);

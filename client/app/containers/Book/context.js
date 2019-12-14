@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 
 import axios from 'axios';
 
@@ -14,13 +14,13 @@ import {
 
 import { initialState, bookReducer } from './reducer';
 
-import { ToastContext } from '../Toast/context';
+import { useToast } from '../Toast';
 
 const BookContext = React.createContext(initialState);
 
 const BookProvider = props => {
   const [state, dispatch] = useReducer(bookReducer, initialState);
-  const toastContext = useContext(ToastContext);
+  // const { add, remove } = useToast();
 
   // add book api
   const addBookApi = async bookData => {
@@ -31,7 +31,6 @@ const BookProvider = props => {
 
       if (book) {
         dispatch(addBook(book));
-        toastContext.add('test');
       }
     } catch (error) {
       console.log(error);
