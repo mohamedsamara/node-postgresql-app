@@ -31,7 +31,7 @@ const BookProvider = props => {
 
       if (book) {
         dispatch(addBook(book));
-        add('test', 'success');
+        add(`${response.data.message}`, 'success');
       }
     } catch (error) {
       console.log(error);

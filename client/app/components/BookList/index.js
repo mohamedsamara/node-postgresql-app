@@ -73,6 +73,7 @@ const BookList = () => {
       subscribe = true;
       context.fetchBooksApi();
     }
+
     return () => {
       subscribe = false;
     };

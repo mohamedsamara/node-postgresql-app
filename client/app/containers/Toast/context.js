@@ -11,16 +11,16 @@ const ToastContext = React.createContext(initialState);
 // toast components
 const ToastContainer = props => <div className="toast-container" {...props} />;
 
-const Toast = ({ children, onDismiss, autoDismiss, appearance }) => {
+const Toast = ({ children, onDismiss, autoDismiss, closeIcon, appearance }) => {
   const removeRef = useRef();
   removeRef.current = onDismiss;
 
   useEffect(() => {
     let id = 0;
-    if (autoDismiss) {
-      const duration = 5000;
-      id = setTimeout(() => removeRef.current(), duration);
-    }
+    // if (autoDismiss) {
+    const duration = autoDismiss ? 5000 : 15000;
+    id = setTimeout(() => removeRef.current(), duration);
+    // }
 
     return () => clearTimeout(id);
   }, []);
@@ -29,7 +29,9 @@ const Toast = ({ children, onDismiss, autoDismiss, appearance }) => {
     <div className={`toast toast-${appearance}`}>
       <div className="edge" />
       <div className="content">{children}</div>
-      {!autoDismiss && (
+
+      {/* !true => false not rendered but with one more condition which  */}
+      {closeIcon && (
         <button className="close" onClick={onDismiss}>
           x
         </button>
@@ -42,7 +44,7 @@ let toastCounter = 0;
 
 const ToastProvider = props => {
   const [state, dispatch] = useReducer(toastReducer, initialState);
-  const { children, autoDismiss } = props;
+  const { children, autoDismiss, closeIcon } = props;
 
   const add = (content, appearance) => {
     // eslint-disable-next-line no-undef
@@ -70,8 +72,9 @@ const ToastProvider = props => {
             onDismiss={onDismiss(id)}
             {...rest}
             autoDismiss={autoDismiss}
+            closeIcon={closeIcon}
           >
-            {id}---{content}
+            {content}
           </Toast>
         ))}
       </ToastContainer>

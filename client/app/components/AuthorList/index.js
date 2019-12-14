@@ -60,6 +60,7 @@ const AuthorList = () => {
     let subscribe = false;
 
     if (context.state.authors) {
+      subscribe = true;
       context.fetchAuthorsApi();
     }
 
