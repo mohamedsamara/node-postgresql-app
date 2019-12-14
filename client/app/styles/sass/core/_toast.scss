@@ -1,11 +1,17 @@
 .toast-container {
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: fixed;
-  right: 0;
-  top: 0;
+  z-index: 1202;
+  top: 0px;
+  right: 0px;
+  padding: 8px;
 }
 
 .toast {
-  background: #1565c06b;
+  background-color: #fff;
   cursor: pointer;
   margin: 10px;
   padding: 10px;

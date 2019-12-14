@@ -8,9 +8,18 @@ import { initialState, toastReducer } from './reducer';
 
 const ToastContext = React.createContext(initialState);
 
+// toast components
+const ToastContainer = props => <div className="toast-container" {...props} />;
+
+const Toast = ({ children, onDismiss }) => (
+  <div className="toast" onClick={onDismiss}>
+    {children}
+  </div>
+);
+
 let toastCounter = 0;
 
-const ToastProvider = ({ children }) => {
+const ToastProvider = props => {
   const [state, dispatch] = useReducer(toastReducer, initialState);
 
   const add = content => {
@@ -21,7 +30,7 @@ const ToastProvider = ({ children }) => {
   };
 
   const remove = id => {
-    const index = state.toasts.findIndex(t => t.id !== id);
+    const index = state.toasts.findIndex(t => t.id === id);
 
     dispatch(removeToast(index));
   };
@@ -29,8 +38,15 @@ const ToastProvider = ({ children }) => {
   const onDismiss = id => () => remove(id);
 
   return (
-    <ToastContext.Provider value={{ add, onDismiss }}>
-      {children}
+    <ToastContext.Provider value={{ add, remove }}>
+      <ToastContainer>
+        {state.toasts.map(({ content, id, ...rest }) => (
+          <Toast key={id} Toast={Toast} onDismiss={onDismiss(id)} {...rest}>
+            {content}
+          </Toast>
+        ))}
+      </ToastContainer>
+      {props.children}
     </ToastContext.Provider>
   );
 };
