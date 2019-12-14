@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Book = () => {
-  const context = useContext(BookContext);
+  const bookContext = useContext(BookContext);
   const authorContext = useContext(AuthorContext);
 
   const classes = useStyles();
@@ -51,7 +51,7 @@ const Book = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    context.fetchBookApi(id);
+    bookContext.fetchBookApi(id);
     authorContext.fetchAuthorsListApi();
   }, [id]);
 
@@ -61,17 +61,17 @@ const Book = () => {
         <Grid container alignItems="center">
           <Grid item xs>
             <Typography gutterBottom variant="h5">
-              {context.state.book.title}
+              {bookContext.state.book.title}
             </Typography>
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h6">
-              {context.state.book.price}$
+              {bookContext.state.book.price}$
             </Typography>
           </Grid>
         </Grid>
         <Typography color="textSecondary" variant="body2">
-          {context.state.book.description}
+          {bookContext.state.book.description}
         </Typography>
       </div>
       <Divider variant="middle" />
@@ -81,14 +81,14 @@ const Book = () => {
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
           options={authorContext.state.authorsList}
-          value={context.state.book.author}
-          onChange={context.handleBookData}
+          value={bookContext.state.book.author}
+          onChange={bookContext.handleBookData}
         />
         <Button
           variant="outlined"
           fullWidth
           className={classes.saveBtn}
-          onClick={() => context.updateBookApi(context.state.book)}
+          onClick={() => bookContext.updateBookApi(bookContext.state.book)}
         >
           Save Book
         </Button>
