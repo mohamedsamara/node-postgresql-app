@@ -13,7 +13,8 @@ const ToastContainer = props => <div className="toast-container" {...props} />;
 
 const Toast = ({ children, onDismiss }) => (
   <div className="toast" onClick={onDismiss}>
-    {children}
+    <div className="edge" />
+    <div className="content">{children}</div>
   </div>
 );
 
