@@ -11,13 +11,16 @@ const ToastContext = React.createContext(initialState);
 // toast components
 const ToastContainer = props => <div className="toast-container" {...props} />;
 
-const Toast = ({ children, onDismiss }) => {
+const Toast = ({ children, onDismiss, autoDismiss }) => {
   const removeRef = useRef();
   removeRef.current = onDismiss;
 
   useEffect(() => {
-    const duration = 5000;
-    const id = setTimeout(() => removeRef.current(), duration);
+    let id = 0;
+    if (autoDismiss) {
+      const duration = 5000;
+      id = setTimeout(() => removeRef.current(), duration);
+    }
 
     return () => clearTimeout(id);
   }, []);
@@ -26,9 +29,11 @@ const Toast = ({ children, onDismiss }) => {
     <div className="toast">
       <div className="edge" />
       <div className="content">{children}</div>
-      <button className="close" onClick={onDismiss}>
-        x
-      </button>
+      {!autoDismiss && (
+        <button className="close" onClick={onDismiss}>
+          x
+        </button>
+      )}
     </div>
   );
 };
@@ -37,6 +42,7 @@ let toastCounter = 0;
 
 const ToastProvider = props => {
   const [state, dispatch] = useReducer(toastReducer, initialState);
+  const { children, autoDismiss } = props;
 
   const add = content => {
     // eslint-disable-next-line no-undef
@@ -57,12 +63,18 @@ const ToastProvider = props => {
     <ToastContext.Provider value={{ add, remove }}>
       <ToastContainer>
         {state.toasts.map(({ content, id, ...rest }) => (
-          <Toast key={id} Toast={Toast} onDismiss={onDismiss(id)} {...rest}>
-            {content}
+          <Toast
+            key={id}
+            Toast={Toast}
+            onDismiss={onDismiss(id)}
+            {...rest}
+            autoDismiss={autoDismiss}
+          >
+            {id}---{content}
           </Toast>
         ))}
       </ToastContainer>
-      {props.children}
+      {children}
     </ToastContext.Provider>
   );
 };
