@@ -6,22 +6,26 @@ import routes from '../../utils/routes';
 
 import Layout from '../../components/Layout';
 
+import { ToastProvider } from '../Toast/context';
+
 const Application = () => {
   return (
     <Layout>
-      <Switch>
-        {routes.map((route, idx) => {
-          return route.component ? (
-            <Route
-              key={idx}
-              path={route.path}
-              exact={route.exact}
-              name={route.name}
-              render={props => <route.component {...props} />}
-            />
-          ) : null;
-        })}
-      </Switch>
+      <ToastProvider>
+        <Switch>
+          {routes.map((route, idx) => {
+            return route.component ? (
+              <Route
+                key={idx}
+                path={route.path}
+                exact={route.exact}
+                name={route.name}
+                render={props => <route.component {...props} />}
+              />
+            ) : null;
+          })}
+        </Switch>
+      </ToastProvider>
     </Layout>
   );
 };
