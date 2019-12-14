@@ -57,3 +57,27 @@
     }
   }
 }
+
+.toast-success {
+  .edge {
+    background-color: $toast-success-color;
+  }
+}
+
+.toast-info {
+  .edge {
+    background-color: $toast-info-color;
+  }
+}
+
+.toast-warning {
+  .edge {
+    background-color: $toast-warning-color;
+  }
+}
+
+.toast-error {
+  .edge {
+    background-color: $toast-error-color;
+  }
+}

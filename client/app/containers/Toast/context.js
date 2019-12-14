@@ -11,7 +11,7 @@ const ToastContext = React.createContext(initialState);
 // toast components
 const ToastContainer = props => <div className="toast-container" {...props} />;
 
-const Toast = ({ children, onDismiss, autoDismiss }) => {
+const Toast = ({ children, onDismiss, autoDismiss, appearance }) => {
   const removeRef = useRef();
   removeRef.current = onDismiss;
 
@@ -26,7 +26,7 @@ const Toast = ({ children, onDismiss, autoDismiss }) => {
   }, []);
 
   return (
-    <div className="toast">
+    <div className={`toast toast-${appearance}`}>
       <div className="edge" />
       <div className="content">{children}</div>
       {!autoDismiss && (
@@ -44,10 +44,10 @@ const ToastProvider = props => {
   const [state, dispatch] = useReducer(toastReducer, initialState);
   const { children, autoDismiss } = props;
 
-  const add = content => {
+  const add = (content, appearance) => {
     // eslint-disable-next-line no-undef
     const id = toastCounter++;
-    const toast = { content, id };
+    const toast = { content, appearance, id };
     dispatch(addToast(toast));
   };
 
@@ -62,9 +62,10 @@ const ToastProvider = props => {
   return (
     <ToastContext.Provider value={{ add, remove }}>
       <ToastContainer>
-        {state.toasts.map(({ content, id, ...rest }) => (
+        {state.toasts.map(({ content, appearance, id, ...rest }) => (
           <Toast
             key={id}
+            appearance={appearance}
             Toast={Toast}
             onDismiss={onDismiss(id)}
             {...rest}

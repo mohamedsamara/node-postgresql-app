@@ -9,7 +9,7 @@ import { ToastProvider } from '../Toast';
 const Application = () => {
   return (
     <Layout>
-      <ToastProvider autoDismiss>
+      <ToastProvider autoDismiss={false}>
         <Switch>
           {routes.map((route, idx) => {
             return route.component ? (

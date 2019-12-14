@@ -28,7 +28,10 @@ const Homepage = () => {
   const toastContext = useContext(ToastContext);
 
   const add = () => {
-    toastContext.add('test');
+    toastContext.add('test', 'success');
+    toastContext.add('test', 'error');
+    toastContext.add('test', 'info');
+    toastContext.add('test', 'warning');
   };
   return (
     <>
