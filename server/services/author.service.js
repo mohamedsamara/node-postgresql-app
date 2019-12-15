@@ -52,6 +52,8 @@ class AuthorService {
             }),
           );
         });
+
+      return newAuthor;
     } catch (error) {
       throw error;
     }

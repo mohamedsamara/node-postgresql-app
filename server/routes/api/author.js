@@ -9,6 +9,7 @@ router.get('/list', authorController.getAuthorsList);
 router.post('/', authorController.addAuthor);
 router.get('/:id', authorController.getAuthor);
 router.put('/:id', authorController.updateAuthor);
+router.put('/:id/book', authorController.updateAuthorBook);
 router.delete('/:id', authorController.deleteAuthor);
 
 export default router;

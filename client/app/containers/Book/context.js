@@ -62,15 +62,13 @@ const BookProvider = props => {
   const updateBookApi = async bookData => {
     const updatedBook = { ...bookData };
     if (bookData.author) {
-      updatedBook.author = bookData.author.value;
+      updatedBook.author_id = bookData.author.value;
     } else {
-      updatedBook.author = bookData.author;
+      updatedBook.author_id = bookData.author;
     }
 
     try {
-      const response = await axios.put(`/api/book/${bookData.id}`, {
-        author_id: updatedBook.author,
-      });
+      const response = await axios.put(`/api/book/${bookData.id}`, updatedBook);
 
       const book = response.data.data;
 

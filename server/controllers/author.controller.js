@@ -69,9 +69,36 @@ class AuthorController {
       responder.setError(400, 'please enter a valid numeric value');
       return responder.send(res);
     }
+
     try {
       const updatedAuthor = await AuthorService.updateAuthor(id, newAuthor);
-      const updatedAuthorBooks = await AuthorService.updateAuthorBooks(
+      if (!updatedAuthor) {
+        responder.setError(404, `cannot find author with the id: ${id}`);
+      } else {
+        responder.setSuccess(200, 'author updated', updatedAuthor);
+      }
+      return responder.send(res);
+    } catch (error) {
+      responder.setError(404, error);
+      return responder.send(res);
+    }
+  }
+
+  static async updateAuthorBook(req, res) {
+    const newAuthor = req.body;
+    const { id } = req.params;
+    if (!Number(id)) {
+      responder.setError(400, 'please enter a valid numeric value');
+      return responder.send(res);
+    }
+
+    if (!newAuthor) {
+      responder.setError(400, 'some details are missing');
+      return responder.send(res);
+    }
+
+    try {
+      const updatedAuthor = await AuthorService.updateAuthorBooks(
         id,
         newAuthor,
       );

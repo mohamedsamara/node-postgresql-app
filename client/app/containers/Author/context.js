@@ -77,15 +77,13 @@ const AuthorProvider = props => {
     }
 
     try {
-      const response = await axios.put(
-        `/api/author/${updatedAuthor.id}`,
-        updatedAuthor,
-      );
+      const response = await Promise.all([
+        axios.put(`/api/author/${updatedAuthor.id}`, updatedAuthor),
+        axios.put(`/api/author/${updatedAuthor.id}/book`, updatedAuthor),
+      ]);
 
-      const author = response.data.data;
-
-      if (author) {
-        add(`${response.data.message}`, 'info');
+      if (response[0].status === 200 && response[1].status === 200) {
+        add(`${response[0].data.message}`, 'info');
       }
     } catch (error) {
       if (error.response) {
