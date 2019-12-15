@@ -13,9 +13,11 @@ import webpackConfig from '../webpack.config';
 
 import routes from './routes';
 import db from './models';
+import Responder from './helpers/responder.helper';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const responder = new Responder();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -56,6 +58,14 @@ if (process.env.NODE_ENV !== 'production') {
     res.sendFile(path.resolve(__dirname, './client/index.html'));
   });
 }
+
+app.use((req, res) => {
+  responder.setError(
+    400,
+    'Your request could not be processed. Please try again.',
+  );
+  responder.send(res);
+});
 
 const syncOptions = { force: false };
 

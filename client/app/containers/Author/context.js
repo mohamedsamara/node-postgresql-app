@@ -33,7 +33,11 @@ const AuthorProvider = props => {
         add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -49,7 +53,11 @@ const AuthorProvider = props => {
         add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -80,7 +88,11 @@ const AuthorProvider = props => {
         add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -96,7 +108,11 @@ const AuthorProvider = props => {
         add(`${response.error}`, 'error');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -111,7 +127,11 @@ const AuthorProvider = props => {
         dispatch(fetchAuthors(authors));
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -126,7 +146,11 @@ const AuthorProvider = props => {
         dispatch(fetchAuthorsList(authors));
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 

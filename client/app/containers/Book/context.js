@@ -34,7 +34,7 @@ const BookProvider = props => {
         add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      add(`${error.response.data.message}`, 'error');
     }
   };
 
@@ -50,15 +50,26 @@ const BookProvider = props => {
         add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
   // update book api
   const updateBookApi = async bookData => {
+    const updatedBook = { ...bookData };
+    if (bookData.author) {
+      updatedBook.author = bookData.author.value;
+    } else {
+      updatedBook.author = bookData.author;
+    }
+
     try {
       const response = await axios.put(`/api/book/${bookData.id}`, {
-        author_id: bookData.author.value,
+        author_id: updatedBook.author,
       });
 
       const book = response.data.data;
@@ -67,7 +78,11 @@ const BookProvider = props => {
         add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -83,7 +98,11 @@ const BookProvider = props => {
         add(`${response.error}`, 'error');
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -98,7 +117,11 @@ const BookProvider = props => {
         dispatch(fetchBooks(books));
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
@@ -113,7 +136,11 @@ const BookProvider = props => {
         dispatch(fetchBooksList(books));
       }
     } catch (error) {
-      add(`${error}`, 'error');
+      if (error.response) {
+        add(`${error.response.data.message}`, 'error');
+      } else {
+        add(`${error}`, 'error');
+      }
     }
   };
 
