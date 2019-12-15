@@ -20,6 +20,13 @@ const theme = createMuiTheme({
       default: '#e8eaf6',
     },
   },
+  typography: {
+    fontFamily: '"Roboto Slab", sans-serif',
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+  },
 });
 
 export default theme;

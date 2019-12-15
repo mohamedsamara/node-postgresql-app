@@ -10,12 +10,16 @@ import {
   fetchAuthorsList,
   handleAuthor,
 } from './action';
+
 import { initialState, authorReducer } from './reducer';
+
+import { useToast } from '../Toast';
 
 const AuthorContext = React.createContext(initialState);
 
 const AuthorProvider = props => {
   const [state, dispatch] = useReducer(authorReducer, initialState);
+  const { add } = useToast();
 
   // add author api
   const addAuthorApi = async authorData => {
@@ -26,9 +30,10 @@ const AuthorProvider = props => {
 
       if (author) {
         dispatch(addAuthor(author));
+        add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -41,9 +46,10 @@ const AuthorProvider = props => {
 
       if (author) {
         dispatch(fetchAuthor(author));
+        add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -71,10 +77,10 @@ const AuthorProvider = props => {
       const author = response.data.data;
 
       if (author) {
-        // dispatch(updateAuthor(author));
+        add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -85,9 +91,12 @@ const AuthorProvider = props => {
 
       if (response.status === 200) {
         dispatch(deleteAuthor(index));
+        add(`${response.data.message}`, 'info');
+      } else {
+        add(`${response.error}`, 'error');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -102,7 +111,7 @@ const AuthorProvider = props => {
         dispatch(fetchAuthors(authors));
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -117,7 +126,7 @@ const AuthorProvider = props => {
         dispatch(fetchAuthorsList(authors));
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 

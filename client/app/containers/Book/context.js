@@ -34,7 +34,7 @@ const BookProvider = props => {
         add(`${response.data.message}`, 'success');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -47,9 +47,10 @@ const BookProvider = props => {
 
       if (book) {
         dispatch(fetchBook(book));
+        add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -63,10 +64,10 @@ const BookProvider = props => {
       const book = response.data.data;
 
       if (book) {
-        // dispatch(updateBook(book));
+        add(`${response.data.message}`, 'info');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -77,9 +78,12 @@ const BookProvider = props => {
 
       if (response.status === 200) {
         dispatch(deleteBook(index));
+        add(`${response.data.message}`, 'info');
+      } else {
+        add(`${response.error}`, 'error');
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -94,7 +98,7 @@ const BookProvider = props => {
         dispatch(fetchBooks(books));
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 
@@ -109,7 +113,7 @@ const BookProvider = props => {
         dispatch(fetchBooksList(books));
       }
     } catch (error) {
-      console.log(error);
+      add(`${error}`, 'error');
     }
   };
 

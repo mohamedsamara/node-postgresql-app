@@ -17,10 +17,10 @@ const Toast = ({ children, onDismiss, autoDismiss, closeIcon, appearance }) => {
 
   useEffect(() => {
     let id = 0;
-    // if (autoDismiss) {
-    const duration = autoDismiss ? 5000 : 15000;
-    id = setTimeout(() => removeRef.current(), duration);
-    // }
+    if (autoDismiss) {
+      const duration = 5000;
+      id = setTimeout(() => removeRef.current(), duration);
+    }
 
     return () => clearTimeout(id);
   }, []);
@@ -30,7 +30,6 @@ const Toast = ({ children, onDismiss, autoDismiss, closeIcon, appearance }) => {
       <div className="edge" />
       <div className="content">{children}</div>
 
-      {/* !true => false not rendered but with one more condition which  */}
       {closeIcon && (
         <button className="close" onClick={onDismiss}>
           x
