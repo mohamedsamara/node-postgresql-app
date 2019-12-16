@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack",
-    "dev": "babel -d ./dist server",
-    "start": "npm run clean && npm run dev && cross-env NODE_ENV=development nodemon index.js",
-    "production": "npm run clean && npm run dev && npm run build && cross-env NODE_ENV=production node index.js",
+    "build": "cross-env NODE_ENV=production webpack && cross-env NODE_ENV=production babel -d ./dist/server server",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node server",
+    "start": "npm run clean && npm run dev",
+    "production": "npm run clean && npm run build && cross-env NODE_ENV=production node index.js",
     "lint": "eslint **/*.js --ignore-path .eslintignore",
     "lint:fix": "eslint **/*.js --fix --ignore-path .eslintignore",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -45,6 +45,7 @@
     "autoprefixer": "^9.7.1",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-module-resolver": "^4.0.0",
     "chalk": "^2.4.2",
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^1.6.0",
