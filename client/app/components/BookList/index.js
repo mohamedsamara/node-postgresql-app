@@ -20,7 +20,7 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 
-import NoData from '../NoData';
+import Empty from '../Empty';
 
 import { BookContext } from '../../containers/Book/context';
 
@@ -165,7 +165,7 @@ const BookList = () => {
         ))
       ) : (
         <Grid item xs={12} sm={12} md={12}>
-          <NoData details={'It looks like there is no books added yet.'} />
+          <Empty details={'It looks like there is no books added yet.'} />
         </Grid>
       )}
     </Grid>

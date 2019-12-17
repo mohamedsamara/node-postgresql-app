@@ -1,0 +1,5 @@
+-r @babel/register
+-r ignore-styles
+--recursive
+--watch-extensions js,jsx,json
+--timeout 2000

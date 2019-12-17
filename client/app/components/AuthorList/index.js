@@ -15,7 +15,7 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { Link } from 'react-router-dom';
 
-import NoData from '../NoData';
+import Empty from '../Empty';
 
 import { AuthorContext } from '../../containers/Author/context';
 
@@ -138,7 +138,7 @@ const AuthorList = () => {
         ))
       ) : (
         <Grid item xs={12} sm={12} md={12}>
-          <NoData details={'It looks like there is no authors added yet.'} />
+          <Empty details={'It looks like there is no authors added yet.'} />
         </Grid>
       )}
     </Grid>

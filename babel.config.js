@@ -1,4 +1,5 @@
 module.exports = {
+  ignore: ['**/*.test.*'],
   presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: ['@babel/transform-runtime'],
   env: {
@@ -23,6 +24,19 @@ module.exports = {
             root: ['.'],
             alias: {
               'webpack.config': '../webpack.config',
+            },
+          },
+        ],
+      ],
+    },
+    test: {
+      plugins: [
+        [
+          'module-resolver',
+          {
+            root: ['.'],
+            alias: {
+              'webpack.config': './webpack.config',
             },
           },
         ],
