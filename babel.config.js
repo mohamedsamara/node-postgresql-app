@@ -1,5 +1,5 @@
 module.exports = {
-  ignore: ['**/*.test.*'],
+  ignore: ['server/**/*.test.js', 'client/**/*.test.js'],
   presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: ['@babel/transform-runtime'],
   env: {
