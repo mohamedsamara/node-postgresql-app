@@ -5,16 +5,29 @@ import Sequelize from 'sequelize';
 const basename = path.basename(__filename);
 
 const db = {};
+let sequelize;
 
-const sequelize = new Sequelize({
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  dialect: 'postgres',
-  logging: false,
-});
+// development || test
+if (process.env.NODE_ENV !== 'production') {
+  sequelize = new Sequelize({
+    database: process.env.DB_NAME_TEST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+  });
+} else {
+  sequelize = new Sequelize({
+    database: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+    logging: false,
+  });
+}
 
 fs.readdirSync(__dirname)
   .filter(

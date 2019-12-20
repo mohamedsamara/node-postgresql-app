@@ -1,7 +1,6 @@
 module.exports = api => {
   api.cache.using(() => process.env.NODE_ENV);
   return {
-    ignore: ['server/**/*.test.js', 'client/**/*.test.js'],
     presets: ['@babel/preset-env', '@babel/preset-react'],
     plugins: ['@babel/transform-runtime'],
     env: {
@@ -19,6 +18,7 @@ module.exports = api => {
         ],
       },
       production: {
+        ignore: ['server/**/*.test.js', 'client/**/*.test.js'],
         plugins: [
           [
             'module-resolver',

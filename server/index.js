@@ -20,8 +20,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const responder = new Responder();
 
-console.log('NODE_ENV', process.env.NODE_ENV);
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
@@ -71,6 +69,10 @@ app.use((req, res) => {
 });
 
 const syncOptions = { force: false };
+
+if (process.env.NODE_ENV === 'test') {
+  syncOptions.force = true;
+}
 
 // Starting the server, syncing our models
 db.sequelize.sync(syncOptions).then(async () => {
