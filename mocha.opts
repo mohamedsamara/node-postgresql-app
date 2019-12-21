@@ -2,4 +2,4 @@
 -r ignore-styles
 --recursive
 --watch-extensions js,jsx,json
---timeout 2000
+--timeout 10000

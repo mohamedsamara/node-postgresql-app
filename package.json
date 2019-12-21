@@ -11,9 +11,9 @@
     "production": "npm run clean && npm run build",
     "lint": "eslint **/*.js --ignore-path .eslintignore",
     "lint:fix": "eslint **/*.js --fix --ignore-path .eslintignore",
-    "test": "run-p test:* -- --watch",
-    "test:client": "cross-env NODE_ENV=test mocha --opts ./mocha.opts 'client/**/*.test.*'",
-    "test:server": "cross-env NODE_ENV=test mocha --opts ./mocha.opts 'server/**/*.test.*'"
+    "test": "run-p test:*",
+    "test:client": "cross-env NODE_ENV=test mocha --opts ./mocha.opts client/**/*.test.* --watch",
+    "test:server": "cross-env NODE_ENV=test mocha --opts ./mocha.opts server/**/*.test.* --watch"
   },
   "repository": {
     "type": "git",

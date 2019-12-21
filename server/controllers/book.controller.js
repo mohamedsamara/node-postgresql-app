@@ -58,7 +58,7 @@ class BookController {
     const newBook = req.body;
     const { id } = req.params;
     if (!Number(id)) {
-      responder.setError(400, 'please enter a valid numeric value');
+      responder.setError(400, 'please provide a valid numeric value');
       return responder.send(res);
     }
     try {
@@ -79,7 +79,7 @@ class BookController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      responder.setError(400, 'please enter a valid numeric value');
+      responder.setError(400, 'please provide a valid numeric value');
       return responder.send(res);
     }
 
@@ -102,7 +102,7 @@ class BookController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      responder.setError(400, 'please enter a valid numeric value');
+      responder.setError(400, 'please provide a valid numeric value');
       return responder.send(res);
     }
 
