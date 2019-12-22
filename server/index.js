@@ -6,15 +6,11 @@ import compression from 'compression';
 
 import routes from './routes';
 import Responder from './helpers/responder.helper';
-import db from './models';
 import middleware from './middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const responder = new Responder();
-
-// setup middleware
-middleware(app);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +18,9 @@ app.use(routes);
 app.use(cors());
 app.use(compression());
 app.use('api/', routes);
+
+// setup middleware
+middleware(app);
 
 app.use((req, res) => {
   responder.setError(
@@ -31,13 +30,8 @@ app.use((req, res) => {
   responder.send(res);
 });
 
-const syncOptions = { force: false };
-if (process.env.NODE_ENV === 'test') {
-  syncOptions.force = true;
-}
-
-// Starting the server, syncing our models
-db.sequelize.sync(syncOptions).then(async () => {
+// Starting the server
+const boot = () => {
   app.listen(PORT, () => {
     console.log(
       `${chalk.green('✓')} ${chalk.greenBright(
@@ -45,6 +39,11 @@ db.sequelize.sync(syncOptions).then(async () => {
       )}`,
     );
   });
-});
+};
 
-export default app;
+// ensures that app.listen is only when I'm not testing to avoid EADDRINUSE error when mocha is watchings files
+if (process.env.NODE_ENV !== 'test') {
+  boot();
+}
+
+export { app, PORT };
