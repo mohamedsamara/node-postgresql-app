@@ -12,6 +12,14 @@ const seed = async () => {
     description: 'book two description',
     price: '50',
   });
+
+  await db.author.create({
+    name: 'author one',
+  });
+
+  await db.author.create({
+    name: 'author two',
+  });
 };
 
 export default seed;

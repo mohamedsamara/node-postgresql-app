@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaitHttp from 'chai-http';
-import 'chai/register-should';
 
 import { app, PORT } from '../index';
 
@@ -14,13 +13,10 @@ describe('testing app server', () => {
       .get('/')
       .end((err, res) => {
         expect(res.status).to.equal(400);
-
-        if (err) {
-          expect(res).to.contain(
-            'Your request could not be processed. Please try again.',
-          );
-        }
-
+        res.body.should.have.property('status').eql('error');
+        res.body.should.have
+          .property('message')
+          .eql('Your request could not be processed. Please try again.');
         done();
       });
   });

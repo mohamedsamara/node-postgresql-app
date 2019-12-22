@@ -59,6 +59,9 @@ describe('testing book endpoints', () => {
       .send(book)
       .end((err, res) => {
         expect(res.status).to.equal(400);
+        res.body.should.have
+          .property('message')
+          .eql('some details are missing');
         done();
       });
   });
@@ -127,10 +130,33 @@ describe('testing book endpoints', () => {
   it('It should update a book', done => {
     const bookId = 2;
     const updatedBook = {
-      id: bookId,
-      title: 'book one',
+      title: 'book one updated',
       price: '10',
-      description: 'book description',
+      description: 'book description updated',
+      author_id: null,
+    };
+    chai
+      .request(app)
+      .put(`/api/book/${bookId}`)
+      .set('Accept', 'application/json')
+      .send(updatedBook)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.data.id).equal(updatedBook.id);
+        expect(res.body.data.title).equal(updatedBook.title);
+        expect(res.body.data.price).equal(updatedBook.price);
+        expect(res.body.data.description).equal(updatedBook.description);
+        done();
+      });
+  });
+
+  it('It should update a book author', done => {
+    const bookId = 2;
+    const updatedBook = {
+      title: 'book one updated',
+      price: '10',
+      description: 'book description updated',
+      author_id: 1,
     };
     chai
       .request(app)
@@ -150,10 +176,10 @@ describe('testing book endpoints', () => {
   it('It should not update a book with invalid id', done => {
     const bookId = '567890';
     const updatedBook = {
-      id: bookId,
-      title: 'book one',
+      title: 'book one updated',
       price: '11',
-      description: 'book description',
+      description: 'book description updated',
+      author_id: null,
     };
     chai
       .request(app)
