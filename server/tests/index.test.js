@@ -1,5 +1,6 @@
 import chai from 'chai';
 import chaitHttp from 'chai-http';
+import 'chai/register-should';
 
 import { app, PORT } from '../index';
 
