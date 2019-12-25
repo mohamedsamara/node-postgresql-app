@@ -9,6 +9,8 @@ if (process.env.NODE_ENV === 'test') {
 
 // Syncing our models
 const initialize = async () => {
+  console.log('is here');
+
   await db.sequelize.sync(syncOptions).then(() => {
     seed();
   });

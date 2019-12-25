@@ -98,7 +98,6 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "faker": "^4.1.0",
     "history": "^4.10.1",
     "immutability-helper": "^3.0.1",
     "material-ui-popup-state": "^1.4.1",

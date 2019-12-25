@@ -16,6 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
+    logging: false,
   });
 } else {
   sequelize = new Sequelize({

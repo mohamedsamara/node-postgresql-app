@@ -1,15 +1,15 @@
 import chai from 'chai';
 import chaitHttp from 'chai-http';
 
-import { app } from '../index';
+import { app } from '../../index';
 
-import initialize from '../db/initialize';
-import truncate from '../db/truncate';
+import initialize from '../../db/initialize';
+// import truncate from '../../db/truncate';
 
 const { expect } = chai;
 chai.use(chaitHttp);
 
-describe('testing book endpoints', () => {
+describe('Testing book endpoints', () => {
   before(done => {
     (async () => {
       await initialize();
@@ -17,16 +17,17 @@ describe('testing book endpoints', () => {
     })();
   });
 
-  after(done => {
-    (async () => {
-      await truncate('book');
-      done();
-    })();
-  });
+  // after(done => {
+  //   (async () => {
+  //     await truncate('book');
+  //     done();
+  //   })();
+  // });
 
   it('It should create a book', done => {
     const book = {
-      title: 'book one',
+      id: 4,
+      title: 'book four',
       price: '10',
       description: 'book description',
     };
@@ -129,7 +130,7 @@ describe('testing book endpoints', () => {
   it('It should update a book', done => {
     const bookId = 2;
     const updatedBook = {
-      title: 'book one updated',
+      title: 'book two updated',
       price: '10',
       description: 'book description updated',
       author_id: null,
@@ -152,7 +153,7 @@ describe('testing book endpoints', () => {
   it('It should update a book author', done => {
     const bookId = 2;
     const updatedBook = {
-      title: 'book one updated',
+      title: 'book two updated',
       price: '10',
       description: 'book description updated',
       author_id: 1,
@@ -175,7 +176,7 @@ describe('testing book endpoints', () => {
   it('It should not update a book with invalid id', done => {
     const bookId = '567890';
     const updatedBook = {
-      title: 'book one updated',
+      title: 'book updated',
       price: '11',
       description: 'book description updated',
       author_id: null,
@@ -198,7 +199,7 @@ describe('testing book endpoints', () => {
     const bookId = 'test';
     const updatedBook = {
       id: bookId,
-      title: 'book one',
+      title: 'book updated',
       price: '100',
       description: 'book description',
     };

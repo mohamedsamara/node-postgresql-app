@@ -1,15 +1,15 @@
 import chai from 'chai';
 import chaitHttp from 'chai-http';
 
-import { app } from '../index';
+import { app } from '../../index';
 
-import initialize from '../db/initialize';
-import truncate from '../db/truncate';
+import initialize from '../../db/initialize';
+import truncate from '../../db/truncate';
 
 const { expect } = chai;
 chai.use(chaitHttp);
 
-describe('testing author endpoints', () => {
+describe('Testing author endpoints', () => {
   before(done => {
     (async () => {
       await initialize();
@@ -17,12 +17,12 @@ describe('testing author endpoints', () => {
     })();
   });
 
-  after(done => {
-    (async () => {
-      await truncate('author');
-      done();
-    })();
-  });
+  //   after(done => {
+  //     (async () => {
+  //       await truncate('author');
+  //       done();
+  //     })();
+  //   });
 
   it('It should create a author', done => {
     const author = {
@@ -119,7 +119,7 @@ describe('testing author endpoints', () => {
   it('It should update author', done => {
     const authorId = 2;
     const updatedAuthor = {
-      name: 'author one updated',
+      name: 'author two updated',
     };
     chai
       .request(app)
@@ -158,7 +158,7 @@ describe('testing author endpoints', () => {
   it('It should not update author with invalid id', done => {
     const authorId = '567890';
     const updatedAuthor = {
-      name: 'author one updated',
+      name: 'author updated',
     };
     chai
       .request(app)
@@ -177,7 +177,7 @@ describe('testing author endpoints', () => {
   it('It should not update author with non-numeric id value', done => {
     const authorId = 'test';
     const updatedAuthor = {
-      name: 'author one updated',
+      name: 'author updated',
     };
     chai
       .request(app)

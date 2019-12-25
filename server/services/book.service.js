@@ -30,14 +30,6 @@ class BookService {
     }
   }
 
-  static async addAuthor(newAuthor) {
-    try {
-      return await database.author.create(newAuthor);
-    } catch (error) {
-      throw error;
-    }
-  }
-
   static async addBook(newBook) {
     try {
       return await database.book.create(newBook);

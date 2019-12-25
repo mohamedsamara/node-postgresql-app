@@ -7,8 +7,8 @@ import { app, PORT } from '../index';
 const { expect } = chai;
 chai.use(chaitHttp);
 
-describe('testing app server', () => {
-  it(`test responding to http://localhost:${PORT}`, done => {
+describe('Testing app server', () => {
+  it(`it should respond to http://localhost:${PORT}`, done => {
     chai
       .request(app)
       .get('/')

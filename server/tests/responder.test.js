@@ -9,10 +9,10 @@ chai.use(chaitHttp);
 
 const responder = new Responder();
 
-describe('testing responder helper', () => {
+describe('Testing responder helper', () => {
   before(() => {});
 
-  it('should set success correctly', () => {
+  it('It should set success correctly', () => {
     const details = {
       statusCode: 200,
       message: 'test message',
@@ -25,7 +25,7 @@ describe('testing responder helper', () => {
     expect(responder.type).to.equal('success');
   });
 
-  it('should set success with data correctly', () => {
+  it('It should set success with data correctly', () => {
     const details = {
       statusCode: 200,
       message: 'test message',
@@ -44,7 +44,7 @@ describe('testing responder helper', () => {
     expect(responder.data).to.eql(details.data);
   });
 
-  it('should set error correctly', () => {
+  it('It should set error correctly', () => {
     const details = {
       statusCode: 400,
       message: 'test message',
@@ -57,7 +57,7 @@ describe('testing responder helper', () => {
     expect(responder.type).to.equal('error');
   });
 
-  it('should send success correctly', () => {
+  it('It should send success correctly', () => {
     const mockResponse = () => {
       const res = {};
       res.status = sinon.stub().returns(res);
@@ -75,7 +75,8 @@ describe('testing responder helper', () => {
     };
 
     const res = mockResponse();
-    const stub = sinon.stub(responder, 'send').returns(details);
+    const sendStub = sinon.stub(responder, 'send').returns(details);
+    const successStub = sinon.stub(responder, 'setSuccess');
 
     responder.setSuccess(
       details.statusCode,
@@ -85,7 +86,8 @@ describe('testing responder helper', () => {
 
     const result = responder.send(res);
 
-    expect(stub.calledOnce).to.be.true;
+    expect(sendStub.calledOnce).to.be.true;
+    expect(successStub.calledOnce).to.be.true;
     expect(result.statusCode).to.equal(details.statusCode);
     expect(result.message).to.equal(details.message);
   });
