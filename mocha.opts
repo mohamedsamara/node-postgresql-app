@@ -1,5 +1,7 @@
 -r @babel/register
 -r ignore-styles
+-r test/setup.js
+-r test/dom.js
 --recursive
 --watch-extensions js
 --timeout 10000

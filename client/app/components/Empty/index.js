@@ -18,15 +18,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NoData = ({ details }) => {
+const Empty = ({ details }) => {
   const classes = useStyles();
 
   return (
     <Paper className={classes.noData}>
       <LibraryBooksIcon className={classes.icon} />
-      <Typography component="p"> {details}</Typography>
+      <Typography component="p">{details}</Typography>
     </Paper>
   );
 };
 
-export default NoData;
+export default Empty;
