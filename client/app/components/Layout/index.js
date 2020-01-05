@@ -225,7 +225,6 @@ const Layout = props => {
           </NavLink>
         </List>
       </Drawer>
-
       <div className="application-content">
         <main className="main">
           <Container maxWidth="md">{props.children}</Container>

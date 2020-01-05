@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import Empty from '../index';
 
@@ -8,11 +7,21 @@ describe('Testing <Empty/> component', () => {
     details: 'It looks like there is no books added yet.',
   };
 
-  const wrapper = shallow(<Empty {...initialProps} />);
-  const container = mount(<Empty {...initialProps} />);
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(<Empty {...initialProps} />);
+  });
+
+  it('It should shallow renders', () => {
+    shallow(<Empty />);
+  });
+
+  it('It should mounts', () => {
+    mount(<Empty />);
+  });
 
   it('It should have a details prop', () => {
-    expect(container.props().details).to.not.be.undefined;
+    expect(wrapper.props().details).to.not.be.undefined;
   });
 
   it('It should contain the detail prop text', () => {
@@ -22,6 +31,6 @@ describe('Testing <Empty/> component', () => {
   });
 
   it('It should have the p element', () => {
-    expect(container.find('p')).to.have.length(1);
+    expect(wrapper.find('p')).to.have.length(1);
   });
 });
