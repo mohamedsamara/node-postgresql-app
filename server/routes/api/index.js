@@ -5,7 +5,6 @@ import author from './author';
 
 const router = Router();
 
-// book routes
 router.use('/book', book);
 router.use('/author', author);
 

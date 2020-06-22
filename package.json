@@ -1,5 +1,5 @@
 {
-  "name": "postgresql-app",
+  "name": "node-postgresql-app",
   "version": "1.0.0",
   "description": "Node PostgreSQL Application",
   "main": "index.js",
@@ -30,7 +30,7 @@
     "material-ui"
   ],
   "author": "Mohamed Samara (https://github.com/mohamedsamara)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mohamedsamara/node-postgresql-app/issues"
   },

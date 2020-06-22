@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-const page404 = () => {
+const Page404 = () => {
   return (
     <div className="page404">
       <p>The page you requested was not found, for the following reasons</p>
@@ -22,4 +22,4 @@ const page404 = () => {
   );
 };
 
-export default page404;
+export default Page404;
