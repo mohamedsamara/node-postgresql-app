@@ -10,13 +10,11 @@ import history from './utils/history';
 
 const App = () => {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Router history={history}>
-          <Application />
-        </Router>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Router history={history}>
+        <Application />
+      </Router>
+    </ThemeProvider>
   );
 };
 

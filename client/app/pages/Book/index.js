@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 560,
     margin: 'auto',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
   },
   chip: {
     marginRight: theme.spacing(1),
@@ -35,11 +35,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: 12,
     textTransform: 'capitalize',
     marginTop: theme.spacing(2),
-    backgroundColor: '#546e7a',
-    color: `${theme.palette.common.white}`,
-    '&:hover': {
-      color: `${theme.palette.common.black}`,
-    },
   },
 }));
 
@@ -86,6 +81,7 @@ const Book = () => {
         />
         <Button
           variant="outlined"
+          color="primary"
           fullWidth
           className={classes.saveBtn}
           onClick={() => bookStore.updateBookApi(bookStore.state.book)}

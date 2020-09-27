@@ -25,6 +25,6 @@ describe('Testing <Homepage/> component', () => {
         .find(Typography)
         .first()
         .text(),
-    ).to.equal('Book Application.');
+    ).to.equal('Book Store.');
   });
 });

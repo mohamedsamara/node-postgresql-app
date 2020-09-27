@@ -27,8 +27,8 @@ const Homepage = () => {
   return (
     <>
       <Paper className={classes.root}>
-        <Typography variant="h5" component="h3">
-          Book Application.
+        <Typography variant="h6" component="h3">
+          Book Store.
         </Typography>
         <Typography component="p">Node PostgreSQL Application</Typography>
       </Paper>
@@ -48,6 +48,12 @@ const Homepage = () => {
         <Chip
           icon={<DoneIcon fontSize="small" />}
           label="PostgreSQL"
+          color="primary"
+          variant="outlined"
+        />
+        <Chip
+          icon={<DoneIcon fontSize="small" />}
+          label="Sequelize"
           color="primary"
           variant="outlined"
         />

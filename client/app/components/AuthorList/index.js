@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { red } from '@material-ui/core/colors';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { Link } from 'react-router-dom';
@@ -24,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 345,
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: theme.palette.secondary.main,
   },
   authorLink: {
     display: 'block',
@@ -42,8 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
   deleteBtn: {
     fontSize: 12,
-    backgroundColor: '#f44336',
-    color: `${theme.palette.common.white}`,
+    backgroundColor: `${theme.palette.default}`,
   },
   emptyAuthors: {
     padding: theme.spacing(3, 2),
@@ -54,7 +52,6 @@ const AuthorList = () => {
   const classes = useStyles();
   const authorStore = useAuthor();
 
-  // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     let subscribe = false;

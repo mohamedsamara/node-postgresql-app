@@ -1,6 +1,6 @@
 import Book from '../containers/Book';
 import Author from '../containers/Author';
-import Page404 from '../pages/404';
+import Page404 from '../pages/Page404';
 import Homepage from '../pages/Homepage';
 
 const routes = [

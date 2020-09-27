@@ -20,18 +20,3 @@ main {
     margin-top: 64px;
   }
 }
-
-/* scrollbar styles */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $theme-secondary;
-}
-
-::-webkit-scrollbar-track {
-  background: $theme-gray;
-}
-/* scrollbar styles */

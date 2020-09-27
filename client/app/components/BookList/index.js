@@ -11,9 +11,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -39,12 +36,11 @@ const useStyles = makeStyles(theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: theme.palette.secondary.main,
   },
   deleteBtn: {
     fontSize: 12,
-    backgroundColor: '#f44336',
-    color: `${theme.palette.common.white}`,
+    backgroundColor: `${theme.palette.default}`,
   },
   editLink: {
     display: 'block',
@@ -52,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
   },
   authorLink: {
-    color: `${theme.palette.text.primary}`,
+    color: `${theme.palette.text.secondary}`,
     textDecoration: 'none',
   },
   emptyBooks: {
@@ -64,7 +60,6 @@ const BookList = () => {
   const classes = useStyles();
   const bookStore = useBook();
 
-  // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     let subscribe = false;
@@ -88,7 +83,7 @@ const BookList = () => {
               <CardHeader
                 avatar={
                   <Avatar aria-label="recipe" className={classes.avatar}>
-                    {(book.author && book.author.name.charAt(0)) || 'R'}
+                    {book.author ? book.author.name.charAt(0) : 'B'}
                   </Avatar>
                 }
                 action={
@@ -127,12 +122,6 @@ const BookList = () => {
                 )}
               </CardContent>
               <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
                 <IconButton
                   className={clsx(classes.expand, {
                     [classes.expandOpen]: book.isCardOpen,
