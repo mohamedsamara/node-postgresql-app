@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 
 import Empty from '../Empty';
 
-import { BookContext } from '../../containers/Book/context';
+import useBook from '../../containers/Book/useBook';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -61,17 +61,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BookList = () => {
-  const context = useContext(BookContext);
   const classes = useStyles();
+  const bookStore = useBook();
 
   // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     let subscribe = false;
 
-    if (context.state.books) {
+    if (bookStore.state.books) {
       subscribe = true;
-      context.fetchBooksApi();
+      bookStore.fetchBooksApi();
     }
 
     return () => {
@@ -81,8 +81,8 @@ const BookList = () => {
 
   return (
     <Grid container spacing={3}>
-      {context.state.books.length > 0 ? (
-        context.state.books.map((book, index) => (
+      {bookStore.state.books.length > 0 ? (
+        bookStore.state.books.map((book, index) => (
           <Grid key={index} item xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardHeader
@@ -138,7 +138,7 @@ const BookList = () => {
                     [classes.expandOpen]: book.isCardOpen,
                   })}
                   onClick={() =>
-                    context.dispatch(context.toggleBookCard(index))
+                    bookStore.dispatch(bookStore.toggleBookCard(index))
                   }
                   aria-expanded={book.isCardOpen}
                   aria-label="show more"
@@ -154,7 +154,7 @@ const BookList = () => {
                     fullWidth
                     className={classes.deleteBtn}
                     startIcon={<DeleteIcon />}
-                    onClick={() => context.deleteBookApi(index, book.id)}
+                    onClick={() => bookStore.deleteBookApi(index, book.id)}
                   >
                     Delete
                   </Button>

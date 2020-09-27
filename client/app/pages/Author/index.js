@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,13 +9,14 @@ import Button from '@material-ui/core/Button';
 import Select from 'react-select';
 import { useParams } from 'react-router';
 
-import { AuthorContext } from '../../containers/Author/context';
-import { BookContext } from '../../containers/Book/context';
+import useAuthor from '../../containers/Author/useAuthor';
+import useBook from '../../containers/Book/useBook';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: 560,
+    margin: 'auto',
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(1),
   },
@@ -44,16 +45,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Author = () => {
-  const authorContext = useContext(AuthorContext);
-  const bookContext = useContext(BookContext);
+  const authorStore = useAuthor();
+  const bookStore = useBook();
 
   const classes = useStyles();
 
   const { id } = useParams();
 
   useEffect(() => {
-    authorContext.fetchAuthorApi(id);
-    bookContext.fetchBookListApi();
+    authorStore.fetchAuthorApi(id);
+    bookStore.fetchBookListApi();
   }, [id]);
 
   return (
@@ -62,15 +63,15 @@ const Author = () => {
         <Grid container alignItems="center">
           <Grid item xs>
             <Typography gutterBottom variant="h5">
-              {authorContext.state.author.name}
+              {authorStore.state.author.name}
             </Typography>
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h6">
               <Chip
                 className={classes.chip}
-                label={`${authorContext.state.author.books &&
-                  authorContext.state.author.books.length} books`}
+                label={`${authorStore.state.author.books &&
+                  authorStore.state.author.books.length} books`}
               />
             </Typography>
           </Grid>
@@ -83,18 +84,16 @@ const Author = () => {
           name="books"
           className="basic-multi-select"
           classNamePrefix="select"
-          options={bookContext.state.booksList}
-          value={authorContext.state.author.books}
-          onChange={authorContext.handleAuthorData}
+          options={bookStore.state.booksList}
+          value={authorStore.state.author.books}
+          onChange={authorStore.handleAuthorData}
         />
       </div>
       <Button
         variant="outlined"
         fullWidth
         className={classes.saveBtn}
-        onClick={() =>
-          authorContext.updateAuthorApi(authorContext.state.author)
-        }
+        onClick={() => authorStore.updateAuthorApi(authorStore.state.author)}
       >
         Save Author
       </Button>

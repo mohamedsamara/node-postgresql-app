@@ -1,27 +1,16 @@
 import db from '../models';
+import { books, authors } from './data';
 
 const seed = async () => {
-  await db.book.create({
-    id: 1,
-    title: 'book one',
-    description: 'book one description',
-    price: '20',
+  books.map(async item => {
+    await db.book.create(item);
   });
 
-  await db.book.create({
-    id: 2,
-    title: 'book two',
-    description: 'book two description',
-    price: '50',
+  authors.map(async item => {
+    await db.author.create(item);
   });
 
-  await db.author.create({
-    name: 'author one',
-  });
-
-  await db.author.create({
-    name: 'author two',
-  });
+  return { books, authors };
 };
 
 export default seed;

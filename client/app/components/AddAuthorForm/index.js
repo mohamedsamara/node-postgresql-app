@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 
-import { AuthorContext } from '../../containers/Author/context';
+import useAuthor from '../../containers/Author/useAuthor';
 
 import useAuthorInputState from '../../hooks/useAuthorInputState';
 
 const AddAuthorForm = () => {
   const { value, onChange, reset } = useAuthorInputState();
-  const context = useContext(AuthorContext);
+  const authorStore = useAuthor();
 
   return (
     <form
       onSubmit={event => {
         event.preventDefault();
-        context.addAuthorApi(value);
+        authorStore.addAuthorApi(value);
         reset();
       }}
     >

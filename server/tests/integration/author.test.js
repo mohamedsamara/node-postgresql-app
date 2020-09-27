@@ -24,7 +24,7 @@ describe('Testing author endpoints', () => {
   //     })();
   //   });
 
-  it('It should create a author', done => {
+  it('It should create an author', done => {
     const author = {
       name: 'author one',
     };
@@ -42,7 +42,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should not create author with empty parameters', done => {
+  it('It should not create an author with empty parameters', done => {
     const author = {};
     chai
       .request(app)
@@ -71,7 +71,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should get a particular auhtor', done => {
+  it('It should get a particular author', done => {
     const authorId = 1;
     chai
       .request(app)
@@ -116,7 +116,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should update author', done => {
+  it('It should update an author', done => {
     const authorId = 2;
     const updatedAuthor = {
       name: 'author two updated',
@@ -134,7 +134,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should update author books', done => {
+  it('It should update an author books', done => {
     const authorId = 2;
     const updatedAuthor = {
       books: [1, 2],
@@ -155,7 +155,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should not update author with invalid id', done => {
+  it('It should not update an author with invalid id', done => {
     const authorId = '567890';
     const updatedAuthor = {
       name: 'author updated',
@@ -174,7 +174,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should not update author with non-numeric id value', done => {
+  it('It should not update an author with non-numeric id value', done => {
     const authorId = 'test';
     const updatedAuthor = {
       name: 'author updated',
@@ -193,7 +193,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should delete author', done => {
+  it('It should delete an author', done => {
     const authorId = 2;
     chai
       .request(app)
@@ -206,7 +206,7 @@ describe('Testing author endpoints', () => {
       });
   });
 
-  it('It should not delete author with invalid id', done => {
+  it('It should not delete and author with invalid id', done => {
     const authorId = 87667;
     chai
       .request(app)

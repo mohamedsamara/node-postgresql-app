@@ -1,29 +1,35 @@
 import React from 'react';
 
 import { Route, Switch } from 'react-router';
+import { SnackbarProvider } from 'react-snackbar-messages';
 
 import routes from '../../utils/routes';
 import Layout from '../../components/Layout';
-import { ToastProvider } from '../Toast';
+import BookProvider from '../Book/provider';
+import AuthorProvider from '../Author/provider';
 
 const Application = () => {
   return (
     <Layout>
-      <ToastProvider autoDismiss closeIcon>
-        <Switch>
-          {routes.map((route, idx) => {
-            return route.component ? (
-              <Route
-                key={idx}
-                path={route.path}
-                exact={route.exact}
-                name={route.name}
-                render={props => <route.component {...props} />}
-              />
-            ) : null;
-          })}
-        </Switch>
-      </ToastProvider>
+      <SnackbarProvider>
+        <BookProvider>
+          <AuthorProvider>
+            <Switch>
+              {routes.map((route, idx) => {
+                return route.component ? (
+                  <Route
+                    key={idx}
+                    path={route.path}
+                    exact={route.exact}
+                    name={route.name}
+                    render={props => <route.component {...props} />}
+                  />
+                ) : null;
+              })}
+            </Switch>
+          </AuthorProvider>
+        </BookProvider>
+      </SnackbarProvider>
     </Layout>
   );
 };

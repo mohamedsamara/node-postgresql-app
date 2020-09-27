@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -8,13 +8,14 @@ import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router';
 import Select from 'react-select';
 
-import { BookContext } from '../../containers/Book/context';
-import { AuthorContext } from '../../containers/Author/context';
+import useAuthor from '../../containers/Author/useAuthor';
+import useBook from '../../containers/Book/useBook';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: 560,
+    margin: 'auto',
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(1),
   },
@@ -43,16 +44,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Book = () => {
-  const bookContext = useContext(BookContext);
-  const authorContext = useContext(AuthorContext);
-
+  const authorStore = useAuthor();
+  const bookStore = useBook();
   const classes = useStyles();
 
   const { id } = useParams();
 
   useEffect(() => {
-    bookContext.fetchBookApi(id);
-    authorContext.fetchAuthorsListApi();
+    bookStore.fetchBookApi(id);
+    authorStore.fetchAuthorsListApi();
   }, [id]);
 
   return (
@@ -61,17 +61,17 @@ const Book = () => {
         <Grid container alignItems="center">
           <Grid item xs>
             <Typography gutterBottom variant="h5">
-              {bookContext.state.book.title}
+              {bookStore.state.book.title}
             </Typography>
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h6">
-              {bookContext.state.book.price}$
+              {bookStore.state.book.price}$
             </Typography>
           </Grid>
         </Grid>
         <Typography color="textSecondary" variant="body2">
-          {bookContext.state.book.description}
+          {bookStore.state.book.description}
         </Typography>
       </div>
       <Divider variant="middle" />
@@ -80,15 +80,15 @@ const Book = () => {
           name="author"
           className={`basic-multi-select ${classes.dropdown}`}
           classNamePrefix="select"
-          options={authorContext.state.authorsList}
-          value={bookContext.state.book.author}
-          onChange={bookContext.handleBookData}
+          options={authorStore.state.authorsList}
+          value={bookStore.state.book.author}
+          onChange={bookStore.handleBookData}
         />
         <Button
           variant="outlined"
           fullWidth
           className={classes.saveBtn}
-          onClick={() => bookContext.updateBookApi(bookContext.state.book)}
+          onClick={() => bookStore.updateBookApi(bookStore.state.book)}
         >
           Save Book
         </Button>

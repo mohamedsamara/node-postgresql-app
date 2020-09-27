@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 
-import { BookContext } from '../../containers/Book/context';
+import useBook from '../../containers/Book/useBook';
 
 import useBookInputState from '../../hooks/useBookInputState';
 
@@ -18,11 +18,11 @@ const useStyles = makeStyles(theme => ({
 const AddBookForm = () => {
   const classes = useStyles();
   const { values, onChange, reset } = useBookInputState();
-  const context = useContext(BookContext);
+  const bookStore = useBook();
 
   const handleSubmit = event => {
     event.preventDefault();
-    context.addBookApi(values);
+    bookStore.addBookApi(values);
     reset();
   };
 

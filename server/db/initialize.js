@@ -9,8 +9,12 @@ if (process.env.NODE_ENV === 'test') {
 
 // Syncing our models
 const initialize = async () => {
-  await db.sequelize.sync(syncOptions).then(() => {
-    seed();
+  db.sequelize.sync(syncOptions).then(async () => {
+    console.log(`Database & tables created!`);
+
+    seed().then(() => {
+      console.log(`Seeds created!`);
+    });
   });
 };
 

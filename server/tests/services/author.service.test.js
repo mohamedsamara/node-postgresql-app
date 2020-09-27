@@ -9,7 +9,7 @@ const { expect } = chai;
 chai.use(chaitHttp);
 
 describe('Testing author service', () => {
-  it('It should create a author to the db', async () => {
+  it('It should create an author to the db', async () => {
     const stubValue = {
       name: 'author five',
     };
@@ -34,7 +34,7 @@ describe('Testing author service', () => {
     expect(author).to.have.property('name');
   });
 
-  it('It should delete a author from the db', async () => {
+  it('It should delete an author from the db', async () => {
     const stubValue = {
       id: 1,
       name: 'author one',
@@ -46,7 +46,7 @@ describe('Testing author service', () => {
     expect(stub.calledOnce).to.be.true;
   });
 
-  it('It should update a author from the db', async () => {
+  it('It should update an author from the db', async () => {
     const stubValue = {
       id: 1,
       name: 'author one updated',

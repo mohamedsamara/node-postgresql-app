@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 import Empty from '../Empty';
 
-import { AuthorContext } from '../../containers/Author/context';
+import useAuthor from '../../containers/Author/useAuthor';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,17 +51,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AuthorList = () => {
-  const context = useContext(AuthorContext);
   const classes = useStyles();
+  const authorStore = useAuthor();
 
   // The effect depends on no variables, so it is only triggered when the component mounts.
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     let subscribe = false;
 
-    if (context.state.authors) {
+    if (authorStore.state.authors) {
       subscribe = true;
-      context.fetchAuthorsApi();
+      authorStore.fetchAuthorsApi();
     }
 
     return () => {
@@ -71,8 +71,8 @@ const AuthorList = () => {
 
   return (
     <Grid container spacing={3}>
-      {context.state.authors.length > 0 ? (
-        context.state.authors.map((author, index) => (
+      {authorStore.state.authors.length > 0 ? (
+        authorStore.state.authors.map((author, index) => (
           <Grid key={index} item xs={12} sm={6} md={4}>
             <Card>
               <Link to={`/author/${author.id}`} className={classes.authorLink}>
@@ -122,7 +122,7 @@ const AuthorList = () => {
                             className={classes.deleteBtn}
                             startIcon={<DeleteIcon />}
                             onClick={() =>
-                              context.deleteAuthorApi(index, author.id)
+                              authorStore.deleteAuthorApi(index, author.id)
                             }
                           >
                             Delete
