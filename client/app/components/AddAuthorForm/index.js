@@ -3,7 +3,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 import useAuthor from '../../containers/Author/useAuthor';
-
 import useAuthorInputState from '../../hooks/useAuthorInputState';
 
 const AddAuthorForm = () => {

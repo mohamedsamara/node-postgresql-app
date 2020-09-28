@@ -15,7 +15,6 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { Link } from 'react-router-dom';
 
 import Empty from '../Empty';
-
 import useAuthor from '../../containers/Author/useAuthor';
 
 const useStyles = makeStyles(theme => ({

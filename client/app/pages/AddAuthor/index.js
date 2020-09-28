@@ -5,7 +5,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
-
 import { useHistory } from 'react-router-dom';
 
 import useModalState from '../../hooks/useModalState';
@@ -30,7 +29,6 @@ const useStyles = makeStyles(theme => ({
 const AddAuthor = () => {
   const history = useHistory();
   const classes = useStyles();
-
   const { open, setOpen } = useModalState(true);
 
   const handleClose = () => {

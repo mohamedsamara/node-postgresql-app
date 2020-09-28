@@ -18,7 +18,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 
 import Empty from '../Empty';
-
 import useBook from '../../containers/Book/useBook';
 
 const useStyles = makeStyles(theme => ({
